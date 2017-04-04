@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/Brush-26.png</file>
+        <file>icons/Ellipse Stroked-64.png</file>
+        <file>icons/Line-64.png</file>
+        <file>icons/Rectangle Stroked-64.png</file>
+    </qresource>
+</RCC>
