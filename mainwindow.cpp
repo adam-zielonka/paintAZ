@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mywidget = new Widget(this);
     setCentralWidget(mywidget);
     colorButton = new QPushButton(this);
-    colorButton->setStyleSheet("background-color: "+mywidget->color.name()+";");
+    colorButton->setStyleSheet("background-color: "+mywidget->penColor.name()+";");
     ui->toolBar->addWidget(colorButton);
     connect(colorButton,SIGNAL(clicked()),this,SLOT(setColor()));
 }
@@ -25,8 +25,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::setColor()
 {
-    mywidget->color = QColorDialog::getColor();
-    colorButton->setStyleSheet("background-color: "+mywidget->color.name()+";");
+    mywidget->penColor = QColorDialog::getColor();
+    colorButton->setStyleSheet("background-color: "+mywidget->penColor.name()+";");
 }
 
 void MainWindow::on_actionDraw_triggered()

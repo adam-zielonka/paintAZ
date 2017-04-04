@@ -14,7 +14,7 @@ Widget::Widget(QWidget *parent) :
     image(800,600, QImage::Format_RGB32),
     tempImage(800,600, QImage::Format_RGB32)
 {
-    penColor = QColor(Qt::black);
+    color = QColor(Qt::black);
     ui->setupUi(this);
     image.fill(Qt::white);
     mode = DRAW;
@@ -34,7 +34,7 @@ void Widget::mousePressEvent(QMouseEvent * e)
 
 }
 
-QRect Widget::GetRect(int x,int y)
+QRect Widget::GetPoint(int x,int y)
 {
     QRect rect = QRect();
     if(shape == EQUAL)
@@ -44,83 +44,118 @@ QRect Widget::GetRect(int x,int y)
     return rect;
 }
 
-QImage * Widget::GetImage()
-{
-    if(IsTempImage())
-    {
-        tempImage = image;
-        return &tempImage;
-    }
-    else
-        return &image;
-}
-
-bool Widget::IsTempImage()
-{
-    return (mode == DRAW_LINE || mode == DRAW_RECT || mode == DRAW_ELLIPSE);
-}
 
 void Widget::mouseMoveEvent(QMouseEvent * e)
 {
-    QPainter p(GetImage());
-    p.setPen(penColor);
-
     switch (mode) {
     case DRAW:
+    {
+        QPainter p(&image);
+        p.setPen(color);
         p.drawLine(e->x(),e->y(),lastX,lastY);
         lastX = e->x();
         lastY = e->y();
-        break;
-    case DRAW_LINE:
-        p.drawLine(e->x(),e->y(),lastX,lastY);
-        break;
-    case DRAW_RECT:
-        p.drawRect(GetRect(e->x(),e->y()));
-        actualX = e->x();
-        actualY = e->y();
-        break;
-    case DRAW_ELLIPSE:
-        p.drawEllipse(GetRect(e->x(),e->y()));
-        actualX = e->x();
-        actualY = e->y();
+        update();
         break;
     }
-
-    update();
+    case DRAW_LINE:
+    {
+        tempImage = image;
+        QPainter p(&tempImage);
+        p.setPen(color);
+        p.drawLine(e->x(),e->y(),lastX,lastY);
+        update();
+        break;
+    }
+    case DRAW_RECT:
+    {
+        tempImage = image;
+        QPainter p(&tempImage);
+        p.setPen(color);
+        QRect rect = QRect();
+        if(shape == EQUAL)
+            rect.setRect(lastX,lastY,e->x()-lastX,e->x()-lastX);
+        else
+            rect.setCoords(lastX,lastY,e->x(),e->y());
+        p.drawRect(rect);
+        actualX = e->x();
+        actualY = e->y();
+        update();
+        break;
+    }
+    case DRAW_ELLIPSE:
+    {
+        tempImage = image;
+        QPainter p(&tempImage);
+        p.setPen(color);
+        QRect rect = GetPoint(e->x(),y->x());
+        //p.drawEllipse(rect);
+        actualX = e->x();
+        actualY = e->y();
+        update();
+        break;
+    }
+    }
 }
 
 void Widget::mouseReleaseEvent(QMouseEvent * e)
 {
-    QPainter p(&image);
-    p.setPen(penColor);
-
     switch (mode) {
     case DRAW:
-        break;
-    case DRAW_LINE:
-        p.drawLine(e->x(),e->y(),lastX,lastY);
-        break;
-    case DRAW_RECT:
-        p.drawRect(GetRect(e->x(),e->y()));
-        break;
-    case DRAW_ELLIPSE:
-        p.drawEllipse(GetRect(e->x(),e->y()));
+    {
         break;
     }
-
-    lastX = e->x();
-    lastY = e->y();
-    update();
+    case DRAW_LINE:
+    {
+        QPainter p(&image);
+        p.setPen(color);
+        p.drawLine(e->x(),e->y(),lastX,lastY);
+        lastX = e->x();
+        lastY = e->y();
+        update();
+        break;
+    }
+    case DRAW_RECT:
+    {
+        QPainter p(&image);
+        p.setPen(color);
+        QRect rect = QRect();
+        if(shape == EQUAL)
+            rect.setRect(lastX,lastY,e->x()-lastX,e->x()-lastX);
+        else
+            rect.setCoords(lastX,lastY,e->x(),e->y());
+        p.drawRect(rect);
+        p.setPen(color);
+        lastX = e->x();
+        lastY = e->y();
+        update();
+        break;
+    }
+    case DRAW_ELLIPSE:
+    {
+        QPainter p(&image);
+        p.setPen(color);
+        QRect rect = QRect();
+        if(shape == EQUAL)
+            rect.setRect(lastX,lastY,e->x()-lastX,e->x()-lastX);
+        else
+            rect.setCoords(lastX,lastY,e->x(),e->y());
+        p.drawEllipse(rect);
+        lastX = e->x();
+        lastY = e->y();
+        update();
+        break;
+    }
+    }
 }
 
 
 void Widget::paintEvent(QPaintEvent * event)
 {
     QPainter p(this);
-    if(IsTempImage())
+    p.drawImage(0,0,image);
+    if(mode == DRAW_LINE || mode == DRAW_RECT || mode == DRAW_ELLIPSE)
         p.drawImage(0,0,tempImage);
-    else
-        p.drawImage(0,0,image);
 }
 
 void Widget::setDraw()

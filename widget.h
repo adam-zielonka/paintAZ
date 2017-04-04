@@ -16,6 +16,11 @@ enum Shape{
     EQUAL
 };
 
+enum Brush{
+    NONE,
+    FULL
+};
+
 namespace Ui {
 class Widget;
 }
@@ -27,21 +32,7 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
-    void mousePressEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
-    void paintEvent(QPaintEvent * event);
-    void keyPressEvent(QKeyEvent * event);
-    void keyReleaseEvent(QKeyEvent * event);
-    QImage image;
-    QImage tempImage;
-    int lastX;
-    int lastY;
-    int actualX;
-    int actualY;
-    Mode mode;
-    Shape shape;
-    QColor color;
+    QColor penColor;
 
     void setDraw();
     void setDrawLine();
@@ -51,6 +42,22 @@ public:
     void setShapeEqual();
 private:
     Ui::Widget *ui;
+    QImage image;
+    QImage tempImage;
+    int lastX;
+    int lastY;
+    int actualX;
+    int actualY;
+    Mode mode;
+    Shape shape;
+    Brush brush;
+    void mousePressEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
+    void paintEvent(QPaintEvent * event);
+    QRect GetRect(int x, int y);
+    QImage *GetImage();
+    bool IsTempImage();
 };
 
 #endif // WIDGET_H
