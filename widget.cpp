@@ -15,6 +15,7 @@ Widget::Widget(QWidget *parent) :
     tempImage(800,600, QImage::Format_RGB32)
 {
     penColor = QColor(Qt::black);
+    brushColor = QColor(Qt::white);
     ui->setupUi(this);
     image.fill(Qt::white);
     mode = DRAW;
@@ -64,6 +65,8 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
 {
     QPainter p(GetImage());
     p.setPen(penColor);
+    if (brush == FULL)
+        p.setBrush(brushColor);
 
     switch (mode) {
     case DRAW:
@@ -93,6 +96,8 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
 {
     QPainter p(&image);
     p.setPen(penColor);
+    if (brush == FULL)
+        p.setBrush(brushColor);
 
     switch (mode) {
     case DRAW:
@@ -151,4 +156,14 @@ void Widget::setShapeNormal()
 void Widget::setShapeEqual()
 {
     shape = EQUAL;
+}
+
+void Widget::setBrushNone()
+{
+    brush = NONE;
+}
+
+void Widget::setBrushFull()
+{
+    brush = FULL;
 }

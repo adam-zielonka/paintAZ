@@ -4,5 +4,9 @@
         <file>icons/Ellipse Stroked-64.png</file>
         <file>icons/Line-64.png</file>
         <file>icons/Rectangle Stroked-64.png</file>
+        <file>icons/Roller Brush Filled-50.png</file>
+        <file>icons/Roller Brush-50.png</file>
+        <file>icons/Not Equal-64.png</file>
+        <file>icons/Equal Sign-64.png</file>
     </qresource>
 </RCC>

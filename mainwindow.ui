@@ -40,8 +40,16 @@
     <addaction name="actionNormal"/>
     <addaction name="actionEqual"/>
    </widget>
+   <widget class="QMenu" name="menuBrush">
+    <property name="title">
+     <string>Brush</string>
+    </property>
+    <addaction name="actionNone"/>
+    <addaction name="actionFull"/>
+   </widget>
    <addaction name="menuDraw_Mode"/>
    <addaction name="menuShape"/>
+   <addaction name="menuBrush"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -58,6 +66,13 @@
    <addaction name="actionDraw_Line"/>
    <addaction name="actionDraw_Rect"/>
    <addaction name="actionDraw_Ellipse"/>
+   <addaction name="separator"/>
+   <addaction name="actionNormal"/>
+   <addaction name="actionEqual"/>
+   <addaction name="separator"/>
+   <addaction name="actionNone"/>
+   <addaction name="actionFull"/>
+   <addaction name="separator"/>
   </widget>
   <action name="actionDraw">
    <property name="icon">
@@ -96,13 +111,39 @@
    </property>
   </action>
   <action name="actionNormal">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/Not Equal-64.png</normaloff>:/icons/icons/Not Equal-64.png</iconset>
+   </property>
    <property name="text">
     <string>Normal</string>
    </property>
   </action>
   <action name="actionEqual">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/Equal Sign-64.png</normaloff>:/icons/icons/Equal Sign-64.png</iconset>
+   </property>
    <property name="text">
     <string>Equal</string>
+   </property>
+  </action>
+  <action name="actionNone">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/Roller Brush-50.png</normaloff>:/icons/icons/Roller Brush-50.png</iconset>
+   </property>
+   <property name="text">
+    <string>None</string>
+   </property>
+  </action>
+  <action name="actionFull">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/Roller Brush Filled-50.png</normaloff>:/icons/icons/Roller Brush Filled-50.png</iconset>
+   </property>
+   <property name="text">
+    <string>Full</string>
    </property>
   </action>
  </widget>

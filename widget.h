@@ -33,6 +33,7 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
     QColor penColor;
+    QColor brushColor;
 
     void setDraw();
     void setDrawLine();
@@ -40,6 +41,8 @@ public:
     void setDrawEllipse();
     void setShapeNormal();
     void setShapeEqual();
+    void setBrushNone();
+    void setBrushFull();
 private:
     Ui::Widget *ui;
     QImage image;

@@ -17,10 +17,12 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    QPushButton *colorButton;
+    QPushButton *brushColorButton;
+    QPushButton *penColorButton;
 
 public slots:
-    void setColor();
+    void setPenColor();
+    void setBrushColor();
 
 private slots:
     void on_actionDraw_triggered();
@@ -34,6 +36,10 @@ private slots:
     void on_actionNormal_triggered();
 
     void on_actionEqual_triggered();
+
+    void on_actionNone_triggered();
+
+    void on_actionFull_triggered();
 
 private:
     Ui::MainWindow *ui;
