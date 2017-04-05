@@ -14,13 +14,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    newfiledialog.cpp
 
 HEADERS  += widget.h \
-    mainwindow.h
+    mainwindow.h \
+    newfiledialog.h
 
 FORMS    += widget.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    newfiledialog.ui
 
 RESOURCES += \
     resources.qrc

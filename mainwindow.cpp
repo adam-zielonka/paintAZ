@@ -1,9 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QPushButton>
-#include <QColorDialog>
-#include <QColor>
-#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     brushColorButton->setStyleSheet("background-color: "+mywidget->brushColor.name()+";");
     ui->toolBar->addWidget(brushColorButton);
     connect(brushColorButton,SIGNAL(clicked()),this,SLOT(setBrushColor()));
+
+    newFile = new NewFileDialog();
 }
 
 MainWindow::~MainWindow()
@@ -79,4 +77,34 @@ void MainWindow::on_actionNone_triggered()
 void MainWindow::on_actionFull_triggered()
 {
     mywidget->setBrushFull();
+}
+
+void MainWindow::on_actionNew_triggered()
+{
+    newFile->exec();
+    if(newFile->accepted)
+    {
+        mywidget->image = QImage(newFile->width,newFile->height, QImage::Format_RGB32);
+        mywidget->image.fill(Qt::white);
+        newFile->accepted = false;
+        mywidget->update();
+    }
+}
+
+void MainWindow::on_actionOpen_triggered()
+{
+    QString file = QFileDialog::getOpenFileName();
+    mywidget->image.load(file);
+    mywidget->update();
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+
+}
+
+void MainWindow::on_actionSave_As_triggered()
+{
+    QString file = QFileDialog::getSaveFileName();
+    mywidget->image.save(file);
 }

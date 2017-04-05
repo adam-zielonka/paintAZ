@@ -34,6 +34,7 @@ public:
     ~Widget();
     QColor penColor;
     QColor brushColor;
+    QImage image;
 
     void setDraw();
     void setDrawLine();
@@ -45,7 +46,6 @@ public:
     void setBrushFull();
 private:
     Ui::Widget *ui;
-    QImage image;
     QImage tempImage;
     int lastX;
     int lastY;

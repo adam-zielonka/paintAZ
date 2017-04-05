@@ -3,8 +3,12 @@
 
 #include <QMainWindow>
 #include <widget.h>
+#include <newfiledialog.h>
 #include <QPushButton>
+#include <QColorDialog>
 #include <QColor>
+#include <QDebug>
+#include <QFileDialog>
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +23,7 @@ public:
     ~MainWindow();
     QPushButton *brushColorButton;
     QPushButton *penColorButton;
+    NewFileDialog * newFile;
 
 public slots:
     void setPenColor();
@@ -40,6 +45,14 @@ private slots:
     void on_actionNone_triggered();
 
     void on_actionFull_triggered();
+
+    void on_actionNew_triggered();
+
+    void on_actionOpen_triggered();
+
+    void on_actionSave_triggered();
+
+    void on_actionSave_As_triggered();
 
 private:
     Ui::MainWindow *ui;
