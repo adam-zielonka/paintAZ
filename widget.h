@@ -32,9 +32,15 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
-    QColor penColor;
-    QColor brushColor;
-    QImage image;
+
+    void setNewImage(int width, int height);
+    void loadImage(QString file);
+    void saveImage(QString file);
+
+    QColor getPenColor();
+    void setPenColor(QColor color);
+    QColor getBrushColor();
+    void setBrushColor(QColor color);
 
     void setDraw();
     void setDrawLine();
@@ -46,7 +52,10 @@ public:
     void setBrushFull();
 private:
     Ui::Widget *ui;
+    QImage image;
     QImage tempImage;
+    QColor penColor;
+    QColor brushColor;
     int lastX;
     int lastY;
     int actualX;

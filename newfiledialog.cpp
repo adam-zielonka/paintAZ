@@ -14,6 +14,27 @@ NewFileDialog::~NewFileDialog()
     delete ui;
 }
 
+int NewFileDialog::getWidth()
+{
+    return width;
+}
+
+int NewFileDialog::getHeight()
+{
+    return height;
+}
+
+bool NewFileDialog::checkAccept()
+{
+    if(accepted)
+    {
+        accepted = false;
+        return true;
+    }
+    else
+        return false;
+}
+
 void NewFileDialog::on_buttonBox_accepted()
 {
     accepted = true;

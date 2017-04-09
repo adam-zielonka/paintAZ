@@ -28,6 +28,42 @@ Widget::~Widget()
     delete ui;
 }
 
+void Widget::setNewImage(int width, int height)
+{
+    image = QImage(width,height, QImage::Format_RGB32);
+    image.fill(Qt::white);
+}
+
+void Widget::loadImage(QString file)
+{
+    image.load(file);
+}
+
+void Widget::saveImage(QString file)
+{
+    image.save(file);
+}
+
+QColor Widget::getPenColor()
+{
+    return penColor;
+}
+
+void Widget::setPenColor(QColor color)
+{
+    penColor = color;
+}
+
+QColor Widget::getBrushColor()
+{
+    return brushColor;
+}
+
+void Widget::setBrushColor(QColor color)
+{
+    brushColor = color;
+}
+
 void Widget::mousePressEvent(QMouseEvent * e)
 {
     lastX = e->x();

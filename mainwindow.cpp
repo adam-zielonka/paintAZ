@@ -10,12 +10,12 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(mywidget);
 
     penColorButton = new QPushButton(this);
-    penColorButton->setStyleSheet("background-color: "+mywidget->penColor.name()+";");
+    penColorButton->setStyleSheet("background-color: "+mywidget->getPenColor().name()+";");
     ui->toolBar->addWidget(penColorButton);
     connect(penColorButton,SIGNAL(clicked()),this,SLOT(setPenColor()));
 
     brushColorButton = new QPushButton(this);
-    brushColorButton->setStyleSheet("background-color: "+mywidget->brushColor.name()+";");
+    brushColorButton->setStyleSheet("background-color: "+mywidget->getBrushColor().name()+";");
     ui->toolBar->addWidget(brushColorButton);
     connect(brushColorButton,SIGNAL(clicked()),this,SLOT(setBrushColor()));
 
@@ -29,14 +29,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::setPenColor()
 {
-    mywidget->penColor = QColorDialog::getColor();
-    penColorButton->setStyleSheet("background-color: "+mywidget->penColor.name()+";");
+    mywidget->setPenColor(QColorDialog::getColor());
+    penColorButton->setStyleSheet("background-color: "+mywidget->getPenColor().name()+";");
 }
 
 void MainWindow::setBrushColor()
 {
-    mywidget->brushColor = QColorDialog::getColor();
-    brushColorButton->setStyleSheet("background-color: "+mywidget->brushColor.name()+";");
+    mywidget->setBrushColor(QColorDialog::getColor());
+    brushColorButton->setStyleSheet("background-color: "+mywidget->getBrushColor().name()+";");
 }
 
 void MainWindow::on_actionDraw_triggered()
@@ -82,11 +82,9 @@ void MainWindow::on_actionFull_triggered()
 void MainWindow::on_actionNew_triggered()
 {
     newFile->exec();
-    if(newFile->accepted)
+    if(newFile->checkAccept())
     {
-        mywidget->image = QImage(newFile->width,newFile->height, QImage::Format_RGB32);
-        mywidget->image.fill(Qt::white);
-        newFile->accepted = false;
+        mywidget->setNewImage(newFile->getWidth(),newFile->getHeight());
         mywidget->update();
     }
 }
@@ -94,7 +92,7 @@ void MainWindow::on_actionNew_triggered()
 void MainWindow::on_actionOpen_triggered()
 {
     QString file = QFileDialog::getOpenFileName();
-    mywidget->image.load(file);
+    mywidget->loadImage(file);
     mywidget->update();
 }
 
@@ -106,5 +104,5 @@ void MainWindow::on_actionSave_triggered()
 void MainWindow::on_actionSave_As_triggered()
 {
     QString file = QFileDialog::getSaveFileName();
-    mywidget->image.save(file);
+    mywidget->saveImage(file);
 }
