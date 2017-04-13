@@ -21,6 +21,7 @@ Widget::Widget(QWidget *parent) :
     mode = DRAW;
     shape = NORMAL;
     brush = NONE;
+    setMinimumSize(800,600);
 }
 
 Widget::~Widget()
@@ -30,6 +31,7 @@ Widget::~Widget()
 
 void Widget::setNewImage(int width, int height)
 {
+    setMinimumSize(width,height);
     image = QImage(width,height, QImage::Format_RGB32);
     image.fill(Qt::white);
 }
@@ -37,6 +39,7 @@ void Widget::setNewImage(int width, int height)
 void Widget::loadImage(QString file)
 {
     image.load(file);
+    setMinimumSize(image.size());
 }
 
 void Widget::saveImage(QString file)

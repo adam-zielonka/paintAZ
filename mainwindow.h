@@ -9,6 +9,7 @@
 #include <QColor>
 #include <QDebug>
 #include <QFileDialog>
+#include <QScrollArea>
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +25,7 @@ public:
     QPushButton *brushColorButton;
     QPushButton *penColorButton;
     NewFileDialog * newFile;
+    QScrollArea * scrollArea;
 
 public slots:
     void setPenColor();

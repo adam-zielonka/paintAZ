@@ -7,7 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     mywidget = new Widget(this);
-    setCentralWidget(mywidget);
+    scrollArea = new QScrollArea(this);
+    scrollArea->setWidget(mywidget);
+    scrollArea->setWidgetResizable(true);
+    setCentralWidget(scrollArea);
 
     penColorButton = new QPushButton(this);
     penColorButton->setStyleSheet("background-color: "+mywidget->getPenColor().name()+";");
