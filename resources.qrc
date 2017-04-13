@@ -8,5 +8,9 @@
         <file>icons/Roller Brush-50.png</file>
         <file>icons/Not Equal-64.png</file>
         <file>icons/Equal Sign-64.png</file>
+        <file>icons/New File-50.png</file>
+        <file>icons/Open Folder-50.png</file>
+        <file>icons/Save-50.png</file>
+        <file>icons/Save as-50.png</file>
     </qresource>
 </RCC>
