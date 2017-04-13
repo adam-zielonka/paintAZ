@@ -22,6 +22,7 @@ Widget::Widget(QWidget *parent) :
     shape = NORMAL;
     brush = NONE;
     setMinimumSize(800,600);
+    fileName = "";
 }
 
 Widget::~Widget()
@@ -34,17 +35,27 @@ void Widget::setNewImage(int width, int height)
     setMinimumSize(width,height);
     image = QImage(width,height, QImage::Format_RGB32);
     image.fill(Qt::white);
+    tempImage = image;
+    fileName = "";
 }
 
 void Widget::loadImage(QString file)
 {
     image.load(file);
+    tempImage = image;
     setMinimumSize(image.size());
+    fileName = file;
+}
+
+void Widget::saveImage()
+{
+    image.save(fileName);
 }
 
 void Widget::saveImage(QString file)
 {
     image.save(file);
+    fileName = file;
 }
 
 QColor Widget::getPenColor()

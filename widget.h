@@ -36,6 +36,7 @@ public:
     void setNewImage(int width, int height);
     void loadImage(QString file);
     void saveImage(QString file);
+    void saveImage();
 
     QColor getPenColor();
     void setPenColor(QColor color);
@@ -52,6 +53,7 @@ public:
     void setBrushFull();
 private:
     Ui::Widget *ui;
+    QString fileName;
     QImage image;
     QImage tempImage;
     QColor penColor;

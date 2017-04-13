@@ -89,23 +89,32 @@ void MainWindow::on_actionNew_triggered()
     {
         mywidget->setNewImage(newFile->getWidth(),newFile->getHeight());
         mywidget->update();
+        ui->actionSave->setEnabled(false);
     }
 }
 
 void MainWindow::on_actionOpen_triggered()
 {
     QString file = QFileDialog::getOpenFileName();
-    mywidget->loadImage(file);
-    mywidget->update();
+    if(file != "")
+    {
+        mywidget->loadImage(file);
+        mywidget->update();
+        ui->actionSave->setEnabled(true);
+    }
 }
 
 void MainWindow::on_actionSave_triggered()
 {
-
+    mywidget->saveImage();
 }
 
 void MainWindow::on_actionSave_As_triggered()
 {
     QString file = QFileDialog::getSaveFileName();
-    mywidget->saveImage(file);
+    if(file != "")
+    {
+        mywidget->saveImage(file);
+        ui->actionSave->setEnabled(true);
+    }
 }
