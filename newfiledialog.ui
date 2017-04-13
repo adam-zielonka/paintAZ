@@ -50,6 +50,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEditWidth</tabstop>
+  <tabstop>lineEditHeight</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
