@@ -56,10 +56,19 @@
     <addaction name="actionSave_As"/>
     <addaction name="actionSave"/>
    </widget>
+   <widget class="QMenu" name="menuZoom">
+    <property name="title">
+     <string>Zoom</string>
+    </property>
+    <addaction name="actionZoom_In"/>
+    <addaction name="actionZoom_Out"/>
+    <addaction name="actionZoom_to_Actual_Size"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDraw_Mode"/>
    <addaction name="menuShape"/>
    <addaction name="menuBrush"/>
+   <addaction name="menuZoom"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -76,6 +85,10 @@
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
    <addaction name="actionSave_As"/>
+   <addaction name="separator"/>
+   <addaction name="actionZoom_In"/>
+   <addaction name="actionZoom_Out"/>
+   <addaction name="actionZoom_to_Actual_Size"/>
    <addaction name="separator"/>
    <addaction name="actionDraw"/>
    <addaction name="actionDraw_Line"/>
@@ -198,6 +211,33 @@
    </property>
    <property name="text">
     <string>Save As</string>
+   </property>
+  </action>
+  <action name="actionZoom_In">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/Zoom In-50.png</normaloff>:/icons/icons/Zoom In-50.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom In</string>
+   </property>
+  </action>
+  <action name="actionZoom_Out">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/Zoom Out-50.png</normaloff>:/icons/icons/Zoom Out-50.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom Out</string>
+   </property>
+  </action>
+  <action name="actionZoom_to_Actual_Size">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/Zoom to Actual Size-50.png</normaloff>:/icons/icons/Zoom to Actual Size-50.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom to Actual Size</string>
    </property>
   </action>
  </widget>

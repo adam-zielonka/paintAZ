@@ -118,3 +118,22 @@ void MainWindow::on_actionSave_As_triggered()
         ui->actionSave->setEnabled(true);
     }
 }
+
+void MainWindow::on_actionZoom_In_triggered()
+{
+    ui->actionZoom_In->setEnabled(mywidget->zoomIn());
+    ui->actionZoom_Out->setEnabled(true);
+}
+
+void MainWindow::on_actionZoom_Out_triggered()
+{
+    ui->actionZoom_Out->setEnabled(mywidget->zoomOut());
+    ui->actionZoom_In->setEnabled(true);
+}
+
+void MainWindow::on_actionZoom_to_Actual_Size_triggered()
+{
+    ui->actionZoom_In->setEnabled(true);
+    ui->actionZoom_Out->setEnabled(true);
+    mywidget->zoomReset();
+}

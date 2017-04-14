@@ -51,6 +51,9 @@ public:
     void setShapeEqual();
     void setBrushNone();
     void setBrushFull();
+    bool zoomIn();
+    bool zoomOut();
+    void zoomReset();
 private:
     Ui::Widget *ui;
     QString fileName;
@@ -72,6 +75,7 @@ private:
     QRect GetRect(int x, int y);
     QImage *GetImage();
     bool IsTempImage();
+    qreal scale;
 };
 
 #endif // WIDGET_H

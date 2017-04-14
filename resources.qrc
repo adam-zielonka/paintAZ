@@ -12,5 +12,8 @@
         <file>icons/Open Folder-50.png</file>
         <file>icons/Save-50.png</file>
         <file>icons/Save as-50.png</file>
+        <file>icons/Zoom Out-50.png</file>
+        <file>icons/Zoom In-50.png</file>
+        <file>icons/Zoom to Actual Size-50.png</file>
     </qresource>
 </RCC>
