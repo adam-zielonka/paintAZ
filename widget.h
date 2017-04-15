@@ -37,6 +37,7 @@ public:
     void loadImage(QString file);
     void saveImage(QString file);
     void saveImage();
+    QString getFileName();
 
     QColor getPenColor();
     void setPenColor(QColor color);
@@ -47,13 +48,17 @@ public:
     void setDrawLine();
     void setDrawRect();
     void setDrawEllipse();
+
     void setShapeNormal();
     void setShapeEqual();
+
     void setBrushNone();
     void setBrushFull();
+
     bool zoomIn();
     bool zoomOut();
     void zoomReset();
+
 private:
     Ui::Widget *ui;
     QString fileName;

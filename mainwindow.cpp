@@ -23,11 +23,21 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(brushColorButton,SIGNAL(clicked()),this,SLOT(setBrushColor()));
 
     newFile = new NewFileDialog();
+
+    updateWindowTitle();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::updateWindowTitle()
+{
+    if(mywidget->getFileName() == "")
+        setWindowTitle("paintAZ");
+    else
+        setWindowTitle("paintAZ - "+mywidget->getFileName());
 }
 
 void MainWindow::setPenColor()
@@ -90,6 +100,7 @@ void MainWindow::on_actionNew_triggered()
         mywidget->setNewImage(newFile->getWidth(),newFile->getHeight());
         mywidget->update();
         ui->actionSave->setEnabled(false);
+        updateWindowTitle();
     }
 }
 
@@ -101,6 +112,7 @@ void MainWindow::on_actionOpen_triggered()
         mywidget->loadImage(file);
         mywidget->update();
         ui->actionSave->setEnabled(true);
+        updateWindowTitle();
     }
 }
 
@@ -116,6 +128,7 @@ void MainWindow::on_actionSave_As_triggered()
     {
         mywidget->saveImage(file);
         ui->actionSave->setEnabled(true);
+        updateWindowTitle();
     }
 }
 

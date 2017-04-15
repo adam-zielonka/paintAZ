@@ -53,6 +53,11 @@ void Widget::saveImage()
     image.save(fileName);
 }
 
+QString Widget::getFileName()
+{
+    return fileName;
+}
+
 void Widget::saveImage(QString file)
 {
     image.save(file);

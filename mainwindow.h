@@ -26,6 +26,7 @@ public:
     QPushButton *penColorButton;
     NewFileDialog * newFile;
     QScrollArea * scrollArea;
+    void updateWindowTitle();
 
 public slots:
     void setPenColor();
