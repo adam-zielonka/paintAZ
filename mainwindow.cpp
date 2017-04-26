@@ -25,6 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
     newFile = new NewFileDialog();
 
     updateWindowTitle();
+
+    mouseLabel = new QLabel(this);
+    ui->statusbar->addPermanentWidget(mouseLabel);
+    mywidget->setMouseLabel(mouseLabel);
 }
 
 MainWindow::~MainWindow()
@@ -149,4 +153,11 @@ void MainWindow::on_actionZoom_to_Actual_Size_triggered()
     ui->actionZoom_In->setEnabled(true);
     ui->actionZoom_Out->setEnabled(true);
     mywidget->zoomReset();
+}
+
+void MainWindow::on_actionText_triggered()
+{
+    TextDialog textDialog(this);
+    textDialog.exec();
+
 }

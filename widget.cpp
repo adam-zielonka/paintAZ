@@ -24,6 +24,7 @@ Widget::Widget(QWidget *parent) :
     scale = 1.0;
     setMinimumSize(800*scale,600*scale);
     fileName = "";
+    setMouseTracking(true);
 }
 
 Widget::~Widget()
@@ -88,7 +89,6 @@ void Widget::mousePressEvent(QMouseEvent * e)
 {
     lastX = e->x()/scale;
     lastY = e->y()/scale;
-
 }
 
 QRect Widget::GetRect(int x,int y)
@@ -117,35 +117,49 @@ bool Widget::IsTempImage()
     return (mode == DRAW_LINE || mode == DRAW_RECT || mode == DRAW_ELLIPSE);
 }
 
+void Widget::changeMouseLabel(int x, int y)
+{
+    if ((image.size().rwidth() >= x/scale)
+            && (image.size().rheight() >= y/scale)
+            && (0 <= x)
+            && (0 <= y)
+            )
+        mouseLabel->setText("x: "+QString::number((int)(x/scale))+" y: "+QString::number((int)(y/scale)));
+}
+
 void Widget::mouseMoveEvent(QMouseEvent * e)
 {
-    QPainter p(GetImage());
-    p.setPen(penColor);
-    if (brush == FULL)
-        p.setBrush(brushColor);
+    changeMouseLabel(e->x(),e->y());
+    if(e->buttons() == Qt::LeftButton)
+    {
+        QPainter p(GetImage());
+        p.setPen(penColor);
+        if (brush == FULL)
+            p.setBrush(brushColor);
 
-    switch (mode) {
-    case DRAW:
-        p.drawLine(e->x()/scale,e->y()/scale,lastX,lastY);
-        lastX = e->x()/scale;
-        lastY = e->y()/scale;
-        break;
-    case DRAW_LINE:
-        p.drawLine(e->x()/scale,e->y()/scale,lastX,lastY);
-        break;
-    case DRAW_RECT:
-        p.drawRect(GetRect(e->x()/scale,e->y()/scale));
-        actualX = e->x()/scale;
-        actualY = e->y()/scale;
-        break;
-    case DRAW_ELLIPSE:
-        p.drawEllipse(GetRect(e->x()/scale,e->y()/scale));
-        actualX = e->x()/scale;
-        actualY = e->y()/scale;
-        break;
+        switch (mode) {
+        case DRAW:
+            p.drawLine(e->x()/scale,e->y()/scale,lastX,lastY);
+            lastX = e->x()/scale;
+            lastY = e->y()/scale;
+            break;
+        case DRAW_LINE:
+            p.drawLine(e->x()/scale,e->y()/scale,lastX,lastY);
+            break;
+        case DRAW_RECT:
+            p.drawRect(GetRect(e->x()/scale,e->y()/scale));
+            actualX = e->x()/scale;
+            actualY = e->y()/scale;
+            break;
+        case DRAW_ELLIPSE:
+            p.drawEllipse(GetRect(e->x()/scale,e->y()/scale));
+            actualX = e->x()/scale;
+            actualY = e->y()/scale;
+            break;
+        }
+
+        update();
     }
-
-    update();
 }
 
 void Widget::mouseReleaseEvent(QMouseEvent * e)
@@ -260,4 +274,9 @@ void Widget::zoomReset()
     scale = 1.0;
     setMinimumSize(image.size().rwidth()*scale,image.size().rheight()*scale);
     update();
+}
+
+void Widget::setMouseLabel(QLabel *label)
+{
+    mouseLabel = label;
 }

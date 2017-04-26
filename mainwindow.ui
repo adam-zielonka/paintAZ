@@ -10,6 +10,9 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>CrossCursor</cursorShape>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -64,11 +67,18 @@
     <addaction name="actionZoom_Out"/>
     <addaction name="actionZoom_to_Actual_Size"/>
    </widget>
+   <widget class="QMenu" name="menuPast">
+    <property name="title">
+     <string>Text</string>
+    </property>
+    <addaction name="actionText"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDraw_Mode"/>
    <addaction name="menuShape"/>
    <addaction name="menuBrush"/>
    <addaction name="menuZoom"/>
+   <addaction name="menuPast"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -238,6 +248,11 @@
    </property>
    <property name="text">
     <string>Zoom to Actual Size</string>
+   </property>
+  </action>
+  <action name="actionText">
+   <property name="text">
+    <string>Text</string>
    </property>
   </action>
  </widget>

@@ -4,12 +4,14 @@
 #include <QMainWindow>
 #include <widget.h>
 #include <newfiledialog.h>
+#include <textdialog.h>
 #include <QPushButton>
 #include <QColorDialog>
 #include <QColor>
 #include <QDebug>
 #include <QFileDialog>
 #include <QScrollArea>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +28,7 @@ public:
     QPushButton *penColorButton;
     NewFileDialog * newFile;
     QScrollArea * scrollArea;
+    QLabel * mouseLabel;
     void updateWindowTitle();
 
 public slots:
@@ -62,6 +65,8 @@ private slots:
     void on_actionZoom_Out_triggered();
 
     void on_actionZoom_to_Actual_Size_triggered();
+
+    void on_actionText_triggered();
 
 private:
     Ui::MainWindow *ui;

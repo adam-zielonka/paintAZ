@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QLabel>
 
 
 enum Mode{
@@ -59,6 +60,7 @@ public:
     bool zoomOut();
     void zoomReset();
 
+    void setMouseLabel(QLabel *label);
 private:
     Ui::Widget *ui;
     QString fileName;
@@ -81,6 +83,8 @@ private:
     QImage *GetImage();
     bool IsTempImage();
     qreal scale;
+    QLabel * mouseLabel;
+    void changeMouseLabel(int x, int y);
 };
 
 #endif // WIDGET_H

@@ -15,15 +15,18 @@ TEMPLATE = app
 SOURCES += main.cpp\
         widget.cpp \
     mainwindow.cpp \
-    newfiledialog.cpp
+    newfiledialog.cpp \
+    textdialog.cpp
 
 HEADERS  += widget.h \
     mainwindow.h \
-    newfiledialog.h
+    newfiledialog.h \
+    textdialog.h
 
 FORMS    += widget.ui \
     mainwindow.ui \
-    newfiledialog.ui
+    newfiledialog.ui \
+    textdialog.ui
 
 RESOURCES += \
     resources.qrc
