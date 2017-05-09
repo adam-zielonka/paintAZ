@@ -3,7 +3,13 @@
 
 #include <QWidget>
 #include <QLabel>
-
+#include <QMouseEvent>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QImage>
+#include <QRect>
+#include <cmath>
+#include <QList>
 
 enum Mode{
     DRAW,
@@ -61,6 +67,11 @@ public:
     void zoomReset();
 
     void setMouseLabel(QLabel *label);
+
+    void setUndoImage(QAction * undo);
+    void setRedoImage(QAction * redo);
+    void undoImage();
+    void redoImage();
 private:
     Ui::Widget *ui;
     QString fileName;
@@ -85,6 +96,12 @@ private:
     qreal scale;
     QLabel * mouseLabel;
     void changeMouseLabel(int x, int y);
+    QAction * undo;
+    QAction * redo;
+    QList<QImage> imageListUndo;
+    QList<QImage> imageListRedo;
+    bool undoAgain;
+    bool redoAgain;
 };
 
 #endif // WIDGET_H

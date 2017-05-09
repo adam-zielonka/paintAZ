@@ -1,12 +1,5 @@
 #include "widget.h"
 #include "ui_widget.h"
-#include "QDebug"
-#include "QMouseEvent"
-#include "QPaintEvent"
-#include "QPainter"
-#include "QImage"
-#include <QRect>
-#include <cmath>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -25,6 +18,7 @@ Widget::Widget(QWidget *parent) :
     setMinimumSize(800*scale,600*scale);
     fileName = "";
     setMouseTracking(true);
+    imageListUndo << image;
 }
 
 Widget::~Widget()
@@ -39,6 +33,9 @@ void Widget::setNewImage(int width, int height)
     image.fill(Qt::white);
     tempImage = image;
     fileName = "";
+    imageListUndo.clear();
+    imageListUndo << image;
+    imageListRedo.clear();
 }
 
 void Widget::loadImage(QString file)
@@ -47,6 +44,9 @@ void Widget::loadImage(QString file)
     tempImage = image;
     setMinimumSize(image.size().rwidth()*scale,image.size().rheight()*scale);
     fileName = file;
+    imageListUndo.clear();
+    imageListUndo << image;
+    imageListRedo.clear();
 }
 
 void Widget::saveImage()
@@ -185,12 +185,22 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
 
     lastX = e->x()/scale;
     lastY = e->y()/scale;
+
+    imageListUndo << image;
+    undo->setEnabled(true);
+    undoAgain = false;
+
+    imageListRedo.clear();
+    redo->setEnabled(false);
+    redoAgain = false;
+
     update();
 }
 
 
 void Widget::paintEvent(QPaintEvent * event)
 {
+    event->accept();
     QPainter p(this);
     p.scale(scale,scale);
     if(IsTempImage())
@@ -279,4 +289,60 @@ void Widget::zoomReset()
 void Widget::setMouseLabel(QLabel *label)
 {
     mouseLabel = label;
+}
+
+void Widget::setUndoImage(QAction *undo)
+{
+    this->undo = undo;
+}
+
+void Widget::setRedoImage(QAction *redo)
+{
+    this->redo = redo;
+}
+
+void Widget::undoImage()
+{
+    if(!undoAgain)
+    {
+        imageListRedo << imageListUndo.takeLast();
+    }
+    undoAgain = true;
+    redoAgain = false;
+    image = tempImage = imageListUndo.takeLast();
+    if(!imageListUndo.isEmpty())
+        undo->setEnabled(true);
+    else
+    {
+        undo->setEnabled(false);
+        imageListUndo << image;
+    }
+
+    redo->setEnabled(true);
+    imageListRedo << image;
+
+    update();
+}
+
+void Widget::redoImage()
+{
+    if(!redoAgain)
+    {
+        if(imageListUndo.size() != 1)
+            imageListUndo << imageListRedo.takeLast();
+        else
+            imageListRedo.takeLast();
+    }
+    redoAgain = true;
+    undoAgain = false;
+    image = tempImage = imageListRedo.takeLast();
+    if(!imageListRedo.isEmpty())
+        redo->setEnabled(true);
+    else
+        redo->setEnabled(false);
+
+    undo->setEnabled(true);
+    imageListUndo << image;
+
+    update();
 }

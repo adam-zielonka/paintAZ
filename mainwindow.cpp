@@ -29,6 +29,9 @@ MainWindow::MainWindow(QWidget *parent) :
     mouseLabel = new QLabel(this);
     ui->statusbar->addPermanentWidget(mouseLabel);
     mywidget->setMouseLabel(mouseLabel);
+
+    mywidget->setUndoImage(ui->actionUndo);
+    mywidget->setRedoImage(ui->actionRedo);
 }
 
 MainWindow::~MainWindow()
@@ -160,4 +163,14 @@ void MainWindow::on_actionText_triggered()
     TextDialog textDialog(this);
     textDialog.exec();
 
+}
+
+void MainWindow::on_actionUndo_triggered()
+{
+    mywidget->undoImage();
+}
+
+void MainWindow::on_actionRedo_triggered()
+{
+    mywidget->redoImage();
 }

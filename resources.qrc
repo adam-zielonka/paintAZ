@@ -15,5 +15,7 @@
         <file>icons/Zoom Out-50.png</file>
         <file>icons/Zoom In-50.png</file>
         <file>icons/Zoom to Actual Size-50.png</file>
+        <file>icons/Redo-50.png</file>
+        <file>icons/Undo-50.png</file>
     </qresource>
 </RCC>
