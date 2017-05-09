@@ -160,10 +160,16 @@ void MainWindow::on_actionZoom_to_Actual_Size_triggered()
 
 void MainWindow::on_actionText_triggered()
 {
-    TextDialog textDialog(this);
-    textDialog.exec();
-
+    setCursor(Qt::IBeamCursor);
+    mywidget->setPaintText();
 }
+
+void MainWindow::on_actionCross_triggered()
+{
+    setCursor(Qt::CrossCursor);
+    mywidget->setPaintDefault();
+}
+
 
 void MainWindow::on_actionUndo_triggered()
 {

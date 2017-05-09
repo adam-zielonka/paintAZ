@@ -14,9 +14,16 @@ class TextDialog : public QDialog
 public:
     explicit TextDialog(QWidget *parent = 0);
     ~TextDialog();
+    QFont GetFont();
+    QString GetText();
+    bool checkAccept();
+
+private slots:
+    void on_buttonBox_accepted();
 
 private:
     Ui::TextDialog *ui;
+    bool accepted;
 };
 
 #endif // TEXTDIALOG_H

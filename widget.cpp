@@ -5,7 +5,8 @@ Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget),
     image(800,600, QImage::Format_RGB32),
-    tempImage(800,600, QImage::Format_RGB32)
+    tempImage(800,600, QImage::Format_RGB32),
+    textDialog(this)
 {
     penColor = QColor(Qt::black);
     brushColor = QColor(Qt::white);
@@ -156,6 +157,8 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
             actualX = e->x()/scale;
             actualY = e->y()/scale;
             break;
+        case TEXT:
+            break;
         }
 
         update();
@@ -180,6 +183,14 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
         break;
     case DRAW_ELLIPSE:
         p.drawEllipse(GetRect(e->x()/scale,e->y()/scale));
+        break;
+    case TEXT:
+        textDialog.exec();
+        if(textDialog.checkAccept())
+        {
+            p.setFont(textDialog.GetFont());
+            p.drawText(e->x()/scale,e->y()/scale,textDialog.GetText());
+        }
         break;
     }
 
@@ -345,4 +356,14 @@ void Widget::redoImage()
     imageListUndo << image;
 
     update();
+}
+
+void Widget::setPaintDefault()
+{
+    mode = DRAW;
+}
+
+void Widget::setPaintText()
+{
+    mode = TEXT;
 }

@@ -69,9 +69,10 @@
    </widget>
    <widget class="QMenu" name="menuPast">
     <property name="title">
-     <string>Text</string>
+     <string>Cursor</string>
     </property>
     <addaction name="actionText"/>
+    <addaction name="actionCross"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -110,6 +111,9 @@
    <addaction name="actionZoom_In"/>
    <addaction name="actionZoom_Out"/>
    <addaction name="actionZoom_to_Actual_Size"/>
+   <addaction name="separator"/>
+   <addaction name="actionCross"/>
+   <addaction name="actionText"/>
    <addaction name="separator"/>
    <addaction name="actionDraw"/>
    <addaction name="actionDraw_Line"/>
@@ -262,6 +266,10 @@
    </property>
   </action>
   <action name="actionText">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/Text Box-50.png</normaloff>:/icons/icons/Text Box-50.png</iconset>
+   </property>
    <property name="text">
     <string>Text</string>
    </property>
@@ -288,6 +296,15 @@
    </property>
    <property name="text">
     <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionCross">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/cross.png</normaloff>:/icons/icons/cross.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cross</string>
    </property>
   </action>
  </widget>

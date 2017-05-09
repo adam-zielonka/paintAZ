@@ -17,5 +17,7 @@
         <file>icons/Zoom to Actual Size-50.png</file>
         <file>icons/Redo-50.png</file>
         <file>icons/Undo-50.png</file>
+        <file>icons/Text Box-50.png</file>
+        <file>icons/cross.png</file>
     </qresource>
 </RCC>

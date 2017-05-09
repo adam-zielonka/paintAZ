@@ -72,6 +72,8 @@ private slots:
 
     void on_actionRedo_triggered();
 
+    void on_actionCross_triggered();
+
 private:
     Ui::MainWindow *ui;
     Widget *mywidget;

@@ -10,12 +10,14 @@
 #include <QRect>
 #include <cmath>
 #include <QList>
+#include <textdialog.h>
 
 enum Mode{
     DRAW,
     DRAW_LINE,
     DRAW_RECT,
-    DRAW_ELLIPSE
+    DRAW_ELLIPSE,
+    TEXT
 };
 
 enum Shape{
@@ -72,6 +74,9 @@ public:
     void setRedoImage(QAction * redo);
     void undoImage();
     void redoImage();
+
+    void setPaintDefault();
+    void setPaintText();
 private:
     Ui::Widget *ui;
     QString fileName;
@@ -102,6 +107,7 @@ private:
     QList<QImage> imageListRedo;
     bool undoAgain;
     bool redoAgain;
+    TextDialog textDialog;
 };
 
 #endif // WIDGET_H
