@@ -32,6 +32,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     mywidget->setUndoImage(ui->actionUndo);
     mywidget->setRedoImage(ui->actionRedo);
+
+    textEdit = new QTextEdit(this);
+    textEdit->setHidden(true);
+    mywidget->setTextEdit(textEdit);
+
+    fontComboBox = new QFontComboBox(this);
+    fontSizeSpinBox = new QSpinBox(this);
+    ui->toolBarText->addWidget(fontComboBox);
+    ui->toolBarText->addWidget(fontSizeSpinBox);
 }
 
 MainWindow::~MainWindow()

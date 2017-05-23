@@ -11,6 +11,7 @@
 #include <cmath>
 #include <QList>
 #include <textdialog.h>
+#include <QTextEdit>
 
 enum Mode{
     DRAW,
@@ -77,6 +78,7 @@ public:
 
     void setPaintDefault();
     void setPaintText();
+    void setTextEdit(QTextEdit * textEdit);
 private:
     Ui::Widget *ui;
     QString fileName;
@@ -108,6 +110,7 @@ private:
     bool undoAgain;
     bool redoAgain;
     TextDialog textDialog;
+    QTextEdit * textEdit;
 };
 
 #endif // WIDGET_H

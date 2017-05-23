@@ -185,12 +185,16 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
         p.drawEllipse(GetRect(e->x()/scale,e->y()/scale));
         break;
     case TEXT:
-        textDialog.exec();
-        if(textDialog.checkAccept())
-        {
-            p.setFont(textDialog.GetFont());
-            p.drawText(e->x()/scale,e->y()/scale,textDialog.GetText());
-        }
+//        textDialog.exec();
+//        if(textDialog.checkAccept())
+//        {
+//            p.setFont(textDialog.GetFont());
+//            p.drawText(e->x()/scale,e->y()/scale,textDialog.GetText());
+//        }
+        textEdit->setVisible(true);
+        QRect rect = QRect();
+        rect.setRect(e->x(),e->y(),200,40);
+        textEdit->setGeometry(rect);
         break;
     }
 
@@ -360,10 +364,17 @@ void Widget::redoImage()
 
 void Widget::setPaintDefault()
 {
+    textEdit->setHidden(true);
     mode = DRAW;
 }
 
 void Widget::setPaintText()
 {
+    textEdit->setVisible(true);
     mode = TEXT;
+}
+
+void Widget::setTextEdit(QTextEdit *textEdit)
+{
+    this->textEdit = textEdit;
 }
