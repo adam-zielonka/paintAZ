@@ -191,10 +191,10 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
 //            p.setFont(textDialog.GetFont());
 //            p.drawText(e->x()/scale,e->y()/scale,textDialog.GetText());
 //        }
-        textEdit->setVisible(true);
-        QRect rect = QRect();
-        rect.setRect(e->x(),e->y(),200,40);
-        textEdit->setGeometry(rect);
+        QFont font = QFont(fontComboBox->currentFont());
+        font.setPointSize(fontSizeSpinBox->value());
+        p.setFont(font);
+        p.drawText(e->x()/scale,e->y()/scale,textEdit->text());
         break;
     }
 
@@ -364,17 +364,17 @@ void Widget::redoImage()
 
 void Widget::setPaintDefault()
 {
-    textEdit->setHidden(true);
     mode = DRAW;
 }
 
 void Widget::setPaintText()
 {
-    textEdit->setVisible(true);
     mode = TEXT;
 }
 
-void Widget::setTextEdit(QTextEdit *textEdit)
+void Widget::setTextEdit(QLineEdit * textEdit,QSpinBox * fontSizeSpinBox,QFontComboBox * fontComboBox)
 {
     this->textEdit = textEdit;
+    this->fontSizeSpinBox = fontSizeSpinBox;
+    this->fontComboBox = fontComboBox;
 }

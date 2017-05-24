@@ -33,14 +33,24 @@ MainWindow::MainWindow(QWidget *parent) :
     mywidget->setUndoImage(ui->actionUndo);
     mywidget->setRedoImage(ui->actionRedo);
 
-    textEdit = new QTextEdit(this);
-    textEdit->setHidden(true);
-    mywidget->setTextEdit(textEdit);
-
     fontComboBox = new QFontComboBox(this);
     fontSizeSpinBox = new QSpinBox(this);
+    fontSizeSpinBox->setValue(22);
+    textEdit = new QLineEdit(this);
+    boldFontButton = new QPushButton(this);
+    italicsFontButton = new QPushButton(this);
+    boldFontButton->setText(" b ");
+    boldFontButton->setStyleSheet("border: 0px solid grey;font-weight: bold;");
+    italicsFontButton->setText(" i ");
+    italicsFontButton->setStyleSheet("border: 0px solid grey;font-style: italics;");
     ui->toolBarText->addWidget(fontComboBox);
     ui->toolBarText->addWidget(fontSizeSpinBox);
+    ui->toolBarText->addWidget(boldFontButton);
+    ui->toolBarText->addWidget(italicsFontButton);
+    ui->toolBarText->addWidget(textEdit);
+
+
+    mywidget->setTextEdit(textEdit,fontSizeSpinBox,fontComboBox);
 }
 
 MainWindow::~MainWindow()

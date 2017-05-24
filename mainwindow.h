@@ -14,6 +14,8 @@
 #include <QLabel>
 #include <QFontComboBox>
 #include <QSpinBox>
+#include <QLineEdit>
+#include <QFont>
 
 namespace Ui {
 class MainWindow;
@@ -32,9 +34,11 @@ public:
     QScrollArea * scrollArea;
     QLabel * mouseLabel;
     void updateWindowTitle();
-    QTextEdit * textEdit;
+    QLineEdit * textEdit;
     QFontComboBox * fontComboBox;
     QSpinBox * fontSizeSpinBox;
+    QPushButton * boldFontButton;
+    QPushButton * italicsFontButton;
 
 public slots:
     void setPenColor();

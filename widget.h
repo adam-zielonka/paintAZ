@@ -12,6 +12,9 @@
 #include <QList>
 #include <textdialog.h>
 #include <QTextEdit>
+#include <QSpinBox>
+#include <QFontComboBox>
+#include <QLineEdit>
 
 enum Mode{
     DRAW,
@@ -78,7 +81,7 @@ public:
 
     void setPaintDefault();
     void setPaintText();
-    void setTextEdit(QTextEdit * textEdit);
+    void setTextEdit(QLineEdit * textEdit,QSpinBox * fontSizeSpinBox,QFontComboBox * fontComboBox);
 private:
     Ui::Widget *ui;
     QString fileName;
@@ -110,7 +113,11 @@ private:
     bool undoAgain;
     bool redoAgain;
     TextDialog textDialog;
-    QTextEdit * textEdit;
+    QLineEdit * textEdit;
+    QSpinBox * fontSizeSpinBox;
+    QFontComboBox * fontComboBox;
+    QPushButton * boldFontButton;
+    QPushButton * italicsFontButton;
 };
 
 #endif // WIDGET_H
