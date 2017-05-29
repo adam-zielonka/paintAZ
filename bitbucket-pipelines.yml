@@ -1,0 +1,8 @@
+image: fffaraz/qt:latest
+
+pipelines:
+  default:
+    - step:
+        script:
+          - qmake
+          - make
