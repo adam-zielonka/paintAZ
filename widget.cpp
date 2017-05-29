@@ -87,6 +87,11 @@ void Widget::setBrushColor(QColor color)
     brushColor = color;
 }
 
+void Widget::setDrawSize(QSpinBox * drawSizeSpinBox)
+{
+    this->drawSizeSpinBox = drawSizeSpinBox;
+}
+
 void Widget::mousePressEvent(QMouseEvent * e)
 {
     lastX = e->x()/scale;
@@ -116,7 +121,10 @@ QImage * Widget::GetImage()
 
 bool Widget::IsTempImage()
 {
-    return (mode == DRAW_LINE || mode == DRAW_RECT || mode == DRAW_ELLIPSE);
+    return (mode == DRAW_LINE ||
+            mode == DRAW_RECT ||
+            mode == DRAW_ROUND_RECT ||
+            mode == DRAW_ELLIPSE);
 }
 
 void Widget::changeMouseLabel(int x, int y)
@@ -135,7 +143,7 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
     if(e->buttons() == Qt::LeftButton)
     {
         QPainter p(GetImage());
-        p.setPen(penColor);
+        p.setPen(QPen(penColor, drawSizeSpinBox->value()));
         if (brush == FULL)
             p.setBrush(brushColor);
 
@@ -150,6 +158,11 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
             break;
         case DRAW_RECT:
             p.drawRect(GetRect(e->x()/scale,e->y()/scale));
+            actualX = e->x()/scale;
+            actualY = e->y()/scale;
+            break;
+        case DRAW_ROUND_RECT:
+            p.drawRoundRect(GetRect(e->x()/scale,e->y()/scale));
             actualX = e->x()/scale;
             actualY = e->y()/scale;
             break;
@@ -169,7 +182,7 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
 void Widget::mouseReleaseEvent(QMouseEvent * e)
 {
     QPainter p(&image);
-    p.setPen(penColor);
+    p.setPen(QPen(penColor, drawSizeSpinBox->value()));
     if (brush == FULL)
         p.setBrush(brushColor);
 
@@ -181,6 +194,9 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
         break;
     case DRAW_RECT:
         p.drawRect(GetRect(e->x()/scale,e->y()/scale));
+        break;
+    case DRAW_ROUND_RECT:
+        p.drawRoundRect(GetRect(e->x()/scale,e->y()/scale));
         break;
     case DRAW_ELLIPSE:
         p.drawEllipse(GetRect(e->x()/scale,e->y()/scale));
@@ -239,6 +255,11 @@ void Widget::setDrawRect()
 void Widget::setDrawEllipse()
 {
     mode = DRAW_ELLIPSE;
+}
+
+void Widget::setDrawRoundRect()
+{
+    mode = DRAW_ROUND_RECT;
 }
 
 void Widget::setShapeNormal()

@@ -50,9 +50,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolBarText->addWidget(boldFontButton);
     ui->toolBarText->addWidget(italicsFontButton);
     ui->toolBarText->addWidget(textEdit);
-
-
     mywidget->setTextEdit(textEdit,fontSizeSpinBox,fontComboBox);
+
+    drawSizeSpinBox = new QSpinBox(this);
+    drawSizeSpinBox->setValue(1);
+    ui->toolBarShape->addWidget(drawSizeSpinBox);
+    mywidget->setDrawSize(drawSizeSpinBox);
 }
 
 MainWindow::~MainWindow()
@@ -220,4 +223,19 @@ void MainWindow::on_actionUndo_triggered()
 void MainWindow::on_actionRedo_triggered()
 {
     mywidget->redoImage();
+}
+
+void MainWindow::on_actionDraw_Round_Rect_triggered()
+{
+    mywidget->setDrawRoundRect();
+}
+
+void MainWindow::on_actionDraw_Size_Up_triggered()
+{
+    drawSizeSpinBox->setValue(drawSizeSpinBox->value()+1);
+}
+
+void MainWindow::on_actionDraw_Size_Down_triggered()
+{
+    drawSizeSpinBox->setValue(drawSizeSpinBox->value()-1);
 }

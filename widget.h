@@ -19,6 +19,7 @@ enum Mode{
     DRAW,
     DRAW_LINE,
     DRAW_RECT,
+    DRAW_ROUND_RECT,
     DRAW_ELLIPSE,
     TEXT
 };
@@ -56,10 +57,13 @@ public:
     QColor getBrushColor();
     void setBrushColor(QColor color);
 
+    void setDrawSize(QSpinBox * drawSizeSpinBox);
+
     void setDraw();
     void setDrawLine();
     void setDrawRect();
     void setDrawEllipse();
+    void setDrawRoundRect();
 
     void setShapeNormal();
     void setShapeEqual();
@@ -118,6 +122,7 @@ private:
     QFontComboBox * fontComboBox;
     bool boldFont;
     bool italicsFont;
+    QSpinBox * drawSizeSpinBox;
 };
 
 #endif // WIDGET_H

@@ -19,5 +19,8 @@
         <file>icons/Undo-50.png</file>
         <file>icons/Text Box-50.png</file>
         <file>icons/cross.png</file>
+        <file>icons/Rounded Rectangle Stroked-50.png</file>
+        <file>icons/Minus-50.png</file>
+        <file>icons/Plus-50.png</file>
     </qresource>
 </RCC>

@@ -38,6 +38,7 @@ public:
     QSpinBox * fontSizeSpinBox;
     QPushButton * boldFontButton;
     QPushButton * italicsFontButton;
+    QSpinBox * drawSizeSpinBox;
 
 public slots:
     void setPenColor();
@@ -83,6 +84,12 @@ private slots:
     void on_actionRedo_triggered();
 
     void on_actionCross_triggered();
+
+    void on_actionDraw_Round_Rect_triggered();
+
+    void on_actionDraw_Size_Up_triggered();
+
+    void on_actionDraw_Size_Down_triggered();
 
 private:
     Ui::MainWindow *ui;
