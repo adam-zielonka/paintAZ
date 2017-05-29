@@ -10,7 +10,6 @@
 #include <QRect>
 #include <cmath>
 #include <QList>
-#include <textdialog.h>
 #include <QTextEdit>
 #include <QSpinBox>
 #include <QFontComboBox>
@@ -82,6 +81,8 @@ public:
     void setPaintDefault();
     void setPaintText();
     void setTextEdit(QLineEdit * textEdit,QSpinBox * fontSizeSpinBox,QFontComboBox * fontComboBox);
+    bool setBoldFont();
+    bool setItalicsFont();
 private:
     Ui::Widget *ui;
     QString fileName;
@@ -112,12 +113,11 @@ private:
     QList<QImage> imageListRedo;
     bool undoAgain;
     bool redoAgain;
-    TextDialog textDialog;
     QLineEdit * textEdit;
     QSpinBox * fontSizeSpinBox;
     QFontComboBox * fontComboBox;
-    QPushButton * boldFontButton;
-    QPushButton * italicsFontButton;
+    bool boldFont;
+    bool italicsFont;
 };
 
 #endif // WIDGET_H

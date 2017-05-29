@@ -5,8 +5,7 @@ Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget),
     image(800,600, QImage::Format_RGB32),
-    tempImage(800,600, QImage::Format_RGB32),
-    textDialog(this)
+    tempImage(800,600, QImage::Format_RGB32)
 {
     penColor = QColor(Qt::black);
     brushColor = QColor(Qt::white);
@@ -20,6 +19,8 @@ Widget::Widget(QWidget *parent) :
     fileName = "";
     setMouseTracking(true);
     imageListUndo << image;
+    boldFont = false;
+    italicsFont = false;
 }
 
 Widget::~Widget()
@@ -185,14 +186,10 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
         p.drawEllipse(GetRect(e->x()/scale,e->y()/scale));
         break;
     case TEXT:
-//        textDialog.exec();
-//        if(textDialog.checkAccept())
-//        {
-//            p.setFont(textDialog.GetFont());
-//            p.drawText(e->x()/scale,e->y()/scale,textDialog.GetText());
-//        }
         QFont font = QFont(fontComboBox->currentFont());
         font.setPointSize(fontSizeSpinBox->value());
+        font.setBold(boldFont);
+        font.setItalic(italicsFont);
         p.setFont(font);
         p.drawText(e->x()/scale,e->y()/scale,textEdit->text());
         break;
@@ -377,4 +374,16 @@ void Widget::setTextEdit(QLineEdit * textEdit,QSpinBox * fontSizeSpinBox,QFontCo
     this->textEdit = textEdit;
     this->fontSizeSpinBox = fontSizeSpinBox;
     this->fontComboBox = fontComboBox;
+}
+
+bool Widget::setBoldFont()
+{
+    boldFont = !boldFont;
+    return boldFont;
+}
+
+bool Widget::setItalicsFont()
+{
+    italicsFont = !italicsFont;
+    return italicsFont;
 }

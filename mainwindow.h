@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <widget.h>
 #include <newfiledialog.h>
-#include <textdialog.h>
 #include <QPushButton>
 #include <QColorDialog>
 #include <QColor>
@@ -43,6 +42,8 @@ public:
 public slots:
     void setPenColor();
     void setBrushColor();
+    void setBoldFont();
+    void setItalicsFont();
 
 private slots:
     void on_actionDraw_triggered();

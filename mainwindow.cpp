@@ -38,11 +38,13 @@ MainWindow::MainWindow(QWidget *parent) :
     fontSizeSpinBox->setValue(22);
     textEdit = new QLineEdit(this);
     boldFontButton = new QPushButton(this);
+    boldFontButton->setText("bold");
+    boldFontButton->setStyleSheet("font-weight: bold;");
+    connect(boldFontButton,SIGNAL(clicked()),this,SLOT(setBoldFont()));
     italicsFontButton = new QPushButton(this);
-    boldFontButton->setText(" b ");
-    boldFontButton->setStyleSheet("border: 0px solid grey;font-weight: bold;");
-    italicsFontButton->setText(" i ");
-    italicsFontButton->setStyleSheet("border: 0px solid grey;font-style: italics;");
+    italicsFontButton->setText("italics");
+    italicsFontButton->setStyleSheet("font-style: italic;");
+    connect(italicsFontButton,SIGNAL(clicked()),this,SLOT(setItalicsFont()));
     ui->toolBarText->addWidget(fontComboBox);
     ui->toolBarText->addWidget(fontSizeSpinBox);
     ui->toolBarText->addWidget(boldFontButton);
@@ -76,6 +78,26 @@ void MainWindow::setBrushColor()
 {
     mywidget->setBrushColor(QColorDialog::getColor());
     brushColorButton->setStyleSheet("background-color: "+mywidget->getBrushColor().name()+";");
+}
+
+void MainWindow::setBoldFont()
+{
+    if(!mywidget->setBoldFont())
+        boldFontButton->setStyleSheet("font-weight: bold;");
+    else
+        boldFontButton->setStyleSheet("font-weight: bold;"
+                                      "background-color: black;"
+                                      "color: white");
+}
+
+void MainWindow::setItalicsFont()
+{
+    if(!mywidget->setItalicsFont())
+        italicsFontButton->setStyleSheet("font-style: italic;");
+    else
+        italicsFontButton->setStyleSheet("font-style: italic;"
+                                         "background-color: black;"
+                                         "color: white");
 }
 
 void MainWindow::on_actionDraw_triggered()
