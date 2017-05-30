@@ -139,6 +139,12 @@ void Widget::changeMouseLabel(int x, int y)
 
 void Widget::mouseMoveEvent(QMouseEvent * e)
 {
+    if(undoAgain)
+    {
+        imageListUndo << image;
+        undoAgain = false;
+    }
+
     changeMouseLabel(e->x(),e->y());
     if(e->buttons() == Qt::LeftButton)
     {
