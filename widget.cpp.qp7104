@@ -181,43 +181,19 @@ void Widget::fillColor(QPainter * painter, QColor color, int x, int y)
 {
     if(x>image.size().rwidth()-1 || y>image.size().rheight()-1 || x<0 || y<0)
         return;
-    if(image.pixelColor(x,y) == color)
+    QPolygon polygon;
+    for(int i=getYBeginOfLine(color,x,y);i<=getYEndOfLine(color,x,y);i++)
     {
-        QPolygon polygon;
-
-        for(int i=getYBeginOfLine(color,x,y);i<=getYEndOfLine(color,x,y);i++)
-            polygon << QPoint(getBeginOfLine(color,x,i),i);
-
-//        for(int i=getBeginOfLine(color,x,y);i<=getEndOfLine(color,x,y);i++)
-//            polygon << QPoint(i,getYEndOfLine(color,i,y));
-
-        for(int i=getYEndOfLine(color,x,y);i>=getYBeginOfLine(color,x,y);i--)
-            polygon << QPoint(getEndOfLine(color,x,i),i);
-
-//        for(int i=getEndOfLine(color,x,y);i>=getBeginOfLine(color,x,y);i--)
-//            polygon << QPoint(i,getYBeginOfLine(color,i,y));
-
-        painter->drawPolygon(polygon);
-        update();
-
-        while(!polygon.isEmpty())
-        {
-            QPoint point = polygon.takeLast();
-
-            fillColor(painter,color,point.x()+1,point.y());
-            fillColor(painter,color,point.x()+1,point.y()-1);
-            fillColor(painter,color,point.x()+1,point.y()+1);
-
-            fillColor(painter,color,point.x()-1,point.y());
-            fillColor(painter,color,point.x()-1,point.y()-1);
-            fillColor(painter,color,point.x()-1,point.y()+1);
-
-            fillColor(painter,color,point.x(),point.y()+1);
-            fillColor(painter,color,point.x(),point.y()-1);
-        }
-        counterFill++;
-        qDebug() << counterFill <<" "<<x<<" "<<y;
+        polygon << QPoint(getBeginOfLine(color,x,i),i);
     }
+    for(int i=getYEndOfLine(color,x,y);i>=getYBeginOfLine(color,x,y);i--)
+    {
+        polygon << QPoint(getEndOfLine(color,x,i),i);
+    }
+    painter->drawPolygon(polygon);
+    update();
+    counterFill++;
+    qDebug() << counterFill <<" "<<x<<" "<<y;
 }
 
 void Widget::mouseMoveEvent(QMouseEvent * e)
@@ -307,7 +283,30 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
             QColor color = image.pixelColor(x,y);
             p.setPen(QPen(penColor, 1));
             p.setBrush(penColor);
-            fillColor(&p,color,x,y);
+            //fillColor(&p,color,x,y);
+            QPolygon polygon;
+            for(int i=getYBeginOfLine(color,x,y);i<=getYEndOfLine(color,x,y);i++)
+            {
+                polygon << QPoint(getBeginOfLine(color,x,i),i);
+            }
+            for(int i=getYEndOfLine(color,x,y);i>=getYBeginOfLine(color,x,y);i--)
+            {
+                polygon << QPoint(getEndOfLine(color,x,i),i);
+            }
+            p.drawPolygon(polygon);
+            update();
+            while(!polygon.isEmpty())
+            {
+                QPoint point = polygon.takeLast();
+                if(image.pixelColor(point.x()+1,point.y()) == color)
+                    fillColor(&p,color,point.x()+1,point.y());
+                if(image.pixelColor(point.x()-1,point.y()) == color)
+                    fillColor(&p,color,point.x()-1,point.y());
+                if(image.pixelColor(point.x(),point.y()+1) == color)
+                    fillColor(&p,color,point.x(),point.y()+1);
+                if(image.pixelColor(point.x(),point.y()-1) == color)
+                    fillColor(&p,color,point.x(),point.y()-1);
+            }
             qDebug() << counterFill;
         }
         break;
