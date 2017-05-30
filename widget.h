@@ -126,6 +126,8 @@ private:
     bool italicsFont;
     QSpinBox * drawSizeSpinBox;
     void fillColor(QPainter * painter,QColor color, int x, int y);
+    int getEndOfLine(QColor color, int x, int y);
+    int getBeginOfLine(QColor color, int x, int y);
 };
 
 #endif // WIDGET_H

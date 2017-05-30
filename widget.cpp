@@ -143,13 +143,30 @@ void Widget::fillColor(QPainter *painter, QColor color, int x, int y)
         return;
     if(image.pixelColor(x,y) == color)
     {
-        painter->drawPoint(x,y);
-        update();
-        fillColor(painter,color,x+1,y);
+        painter->drawLine(getBeginOfLine(color,x,y),y,getEndOfLine(color,x,y),y);
         fillColor(painter,color,x,y+1);
-        fillColor(painter,color,x-1,y);
         fillColor(painter,color,x,y-1);
     }
+}
+
+int Widget::getEndOfLine(QColor color, int x, int y)
+{
+    if(x>image.size().rwidth()-1)
+        return x-1;
+    if(image.pixelColor(x,y) == color)
+        return getEndOfLine(color,x+1,y);
+    else
+        return x-1;
+}
+
+int Widget::getBeginOfLine(QColor color, int x, int y)
+{
+    if(x<0)
+        return 0;
+    if(image.pixelColor(x,y) == color)
+        return getBeginOfLine(color,x-1,y);
+    else
+        return x+1;
 }
 
 void Widget::mouseMoveEvent(QMouseEvent * e)
@@ -204,6 +221,12 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
 
 void Widget::mouseReleaseEvent(QMouseEvent * e)
 {
+    if(undoAgain)
+    {
+        imageListUndo << image;
+        undoAgain = false;
+    }
+
     QPainter p(&image);
     p.setPen(QPen(penColor, drawSizeSpinBox->value()));
     if (brush == FULL)
@@ -226,7 +249,10 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
         break;
     case FILL:
         if(image.pixelColor(e->x()/scale,e->y()/scale) != penColor)
+        {
+            p.setPen(QPen(penColor, 1));
             fillColor(&p,image.pixelColor(e->x()/scale,e->y()/scale),e->x()/scale,e->y()/scale);
+        }
         break;
     case TEXT:
         QFont font = QFont(fontComboBox->currentFont());
