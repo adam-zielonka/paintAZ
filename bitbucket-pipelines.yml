@@ -1,4 +1,4 @@
-image: fffaraz/qt:latest
+image: lamtev/qt:latest
 
 pipelines:
   default:
