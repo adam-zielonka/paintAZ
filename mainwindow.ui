@@ -74,6 +74,7 @@
     </property>
     <addaction name="actionText"/>
     <addaction name="actionCross"/>
+    <addaction name="actionFill"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -420,6 +421,14 @@
    </property>
    <property name="shortcut">
     <string>4</string>
+   </property>
+  </action>
+  <action name="actionFill">
+   <property name="text">
+    <string>Fill</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
    </property>
   </action>
  </widget>

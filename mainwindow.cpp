@@ -239,3 +239,8 @@ void MainWindow::on_actionDraw_Size_Down_triggered()
 {
     drawSizeSpinBox->setValue(drawSizeSpinBox->value()-1);
 }
+
+void MainWindow::on_actionFill_triggered()
+{
+    mywidget->setFill();
+}

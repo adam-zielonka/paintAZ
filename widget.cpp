@@ -137,6 +137,21 @@ void Widget::changeMouseLabel(int x, int y)
         mouseLabel->setText("x: "+QString::number((int)(x/scale))+" y: "+QString::number((int)(y/scale)));
 }
 
+void Widget::fillColor(QPainter *painter, QColor color, int x, int y)
+{
+    if(x>image.size().rwidth()-1 || y>image.size().rheight()-1 || x<0 || y<0)
+        return;
+    if(image.pixelColor(x,y) == color)
+    {
+        painter->drawPoint(x,y);
+        update();
+        fillColor(painter,color,x+1,y);
+        fillColor(painter,color,x,y+1);
+        fillColor(painter,color,x-1,y);
+        fillColor(painter,color,x,y-1);
+    }
+}
+
 void Widget::mouseMoveEvent(QMouseEvent * e)
 {
     if(undoAgain)
@@ -177,6 +192,8 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
             actualX = e->x()/scale;
             actualY = e->y()/scale;
             break;
+        case FILL:
+            break;
         case TEXT:
             break;
         }
@@ -206,6 +223,10 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
         break;
     case DRAW_ELLIPSE:
         p.drawEllipse(GetRect(e->x()/scale,e->y()/scale));
+        break;
+    case FILL:
+        if(image.pixelColor(e->x()/scale,e->y()/scale) != penColor)
+            fillColor(&p,image.pixelColor(e->x()/scale,e->y()/scale),e->x()/scale,e->y()/scale);
         break;
     case TEXT:
         QFont font = QFont(fontComboBox->currentFont());
@@ -266,6 +287,11 @@ void Widget::setDrawEllipse()
 void Widget::setDrawRoundRect()
 {
     mode = DRAW_ROUND_RECT;
+}
+
+void Widget::setFill()
+{
+    mode = FILL;
 }
 
 void Widget::setShapeNormal()

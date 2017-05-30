@@ -21,6 +21,7 @@ enum Mode{
     DRAW_RECT,
     DRAW_ROUND_RECT,
     DRAW_ELLIPSE,
+    FILL,
     TEXT
 };
 
@@ -64,6 +65,7 @@ public:
     void setDrawRect();
     void setDrawEllipse();
     void setDrawRoundRect();
+    void setFill();
 
     void setShapeNormal();
     void setShapeEqual();
@@ -123,6 +125,7 @@ private:
     bool boldFont;
     bool italicsFont;
     QSpinBox * drawSizeSpinBox;
+    void fillColor(QPainter * painter,QColor color, int x, int y);
 };
 
 #endif // WIDGET_H
