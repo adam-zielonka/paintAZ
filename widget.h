@@ -14,6 +14,9 @@
 #include <QSpinBox>
 #include <QFontComboBox>
 #include <QLineEdit>
+#include <QPolygon>
+#include <QPoint>
+#include <QDebug>
 
 enum Mode{
     DRAW,
@@ -21,6 +24,7 @@ enum Mode{
     DRAW_RECT,
     DRAW_ROUND_RECT,
     DRAW_ELLIPSE,
+    FILL,
     TEXT
 };
 
@@ -64,6 +68,7 @@ public:
     void setDrawRect();
     void setDrawEllipse();
     void setDrawRoundRect();
+    void setFill();
 
     void setShapeNormal();
     void setShapeEqual();
@@ -123,6 +128,12 @@ private:
     bool boldFont;
     bool italicsFont;
     QSpinBox * drawSizeSpinBox;
+    int getEndOfLine(QColor color, int x, int y);
+    int getBeginOfLine(QColor color, int x, int y);
+    int getYEndOfLine(QColor color, int x, int y);
+    int getYBeginOfLine(QColor color, int x, int y);
+    void fillColor(QPainter * painter, QColor color, int x, int y);
+    int counterFill;
 };
 
 #endif // WIDGET_H

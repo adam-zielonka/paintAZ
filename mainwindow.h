@@ -91,6 +91,8 @@ private slots:
 
     void on_actionDraw_Size_Down_triggered();
 
+    void on_actionFill_triggered();
+
 private:
     Ui::MainWindow *ui;
     Widget *mywidget;

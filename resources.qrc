@@ -22,5 +22,6 @@
         <file>icons/Rounded Rectangle Stroked-50.png</file>
         <file>icons/Minus-50.png</file>
         <file>icons/Plus-50.png</file>
+        <file>icons/Fill Color-50.png</file>
     </qresource>
 </RCC>

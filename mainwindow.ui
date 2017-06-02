@@ -74,6 +74,7 @@
     </property>
     <addaction name="actionText"/>
     <addaction name="actionCross"/>
+    <addaction name="actionFill"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -123,6 +124,7 @@
    <addaction name="separator"/>
    <addaction name="actionCross"/>
    <addaction name="actionText"/>
+   <addaction name="actionFill"/>
    <addaction name="separator"/>
    <addaction name="actionNone"/>
    <addaction name="actionFull"/>
@@ -420,6 +422,18 @@
    </property>
    <property name="shortcut">
     <string>4</string>
+   </property>
+  </action>
+  <action name="actionFill">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/Fill Color-50.png</normaloff>:/icons/icons/Fill Color-50.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fill</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
    </property>
   </action>
  </widget>

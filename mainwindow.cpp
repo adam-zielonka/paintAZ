@@ -105,21 +105,25 @@ void MainWindow::setItalicsFont()
 
 void MainWindow::on_actionDraw_triggered()
 {
+    setCursor(Qt::CrossCursor);
     mywidget->setDraw();
 }
 
 void MainWindow::on_actionDraw_Line_triggered()
 {
+    setCursor(Qt::CrossCursor);
     mywidget->setDrawLine();
 }
 
 void MainWindow::on_actionDraw_Rect_triggered()
 {
+    setCursor(Qt::CrossCursor);
     mywidget->setDrawRect();
 }
 
 void MainWindow::on_actionDraw_Ellipse_triggered()
 {
+    setCursor(Qt::CrossCursor);
     mywidget->setDrawEllipse();
 }
 
@@ -227,6 +231,7 @@ void MainWindow::on_actionRedo_triggered()
 
 void MainWindow::on_actionDraw_Round_Rect_triggered()
 {
+    setCursor(Qt::CrossCursor);
     mywidget->setDrawRoundRect();
 }
 
@@ -238,4 +243,10 @@ void MainWindow::on_actionDraw_Size_Up_triggered()
 void MainWindow::on_actionDraw_Size_Down_triggered()
 {
     drawSizeSpinBox->setValue(drawSizeSpinBox->value()-1);
+}
+
+void MainWindow::on_actionFill_triggered()
+{
+    setCursor(Qt::PointingHandCursor);
+    mywidget->setFill();
 }
