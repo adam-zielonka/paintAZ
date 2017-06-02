@@ -198,7 +198,6 @@ void Widget::fillColor(QPainter * painter, QColor color, int x, int y)
 //            polygon << QPoint(i,getYBeginOfLine(color,i,y));
 
         painter->drawPolygon(polygon);
-        update();
 
         while(!polygon.isEmpty())
         {
