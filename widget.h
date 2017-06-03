@@ -14,11 +14,9 @@
 #include <QSpinBox>
 #include <QFontComboBox>
 #include <QLineEdit>
-#include <QPolygon>
-#include <QPoint>
-#include <QDebug>
 #include <QPushButton>
 #include "memento.h"
+#include "fillspace.h"
 
 enum Mode{
     DRAW,
@@ -130,12 +128,6 @@ private:
     bool boldFont;
     bool italicsFont;
     QSpinBox * drawSizeSpinBox;
-    int getEndOfLine(QColor color, int x, int y);
-    int getBeginOfLine(QColor color, int x, int y);
-    int getYEndOfLine(QColor color, int x, int y);
-    int getYBeginOfLine(QColor color, int x, int y);
-    void fillColor(QPainter * painter, QColor color, int x, int y);
-    int counterFill;
 };
 
 #endif // WIDGET_H

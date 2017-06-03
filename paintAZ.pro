@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         widget.cpp \
     mainwindow.cpp \
     newfiledialog.cpp \
-    memento.cpp
+    memento.cpp \
+    fillspace.cpp
 
 HEADERS  += widget.h \
     mainwindow.h \
     newfiledialog.h \
-    memento.h
+    memento.h \
+    fillspace.h
 
 FORMS    += widget.ui \
     mainwindow.ui \

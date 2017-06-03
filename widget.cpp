@@ -13,6 +13,7 @@ Widget::Widget(QWidget *parent, QAction * actionUndo, QAction * actionRedo) :
     ui->setupUi(this);
     image.fill(Qt::white);
     tempImage = image;
+    setCursor(Qt::CrossCursor);
     mode = DRAW;
     shape = NORMAL;
     brush = NONE;
@@ -151,88 +152,6 @@ void Widget::changeMouseLabel(int x, int y)
         mouseLabel->setText("x: "+QString::number((int)(x/scale))+" y: "+QString::number((int)(y/scale)));
 }
 
-int Widget::getEndOfLine(QColor color, int x, int y)
-{
-    if(x>image.size().rwidth()-1)
-        return x-1;
-    if(image.pixelColor(x,y) == color)
-        return getEndOfLine(color,x+1,y);
-    else
-        return x-1;
-}
-
-int Widget::getBeginOfLine(QColor color, int x, int y)
-{
-    if(x<0)
-        return 0;
-    if(image.pixelColor(x,y) == color)
-        return getBeginOfLine(color,x-1,y);
-    else
-        return x+1;
-}
-
-int Widget::getYEndOfLine(QColor color, int x, int y)
-{
-    if(y>image.size().rheight()-1)
-        return y-1;
-    if(image.pixelColor(x,y) == color)
-        return getYEndOfLine(color,x,y+1);
-    else
-        return y-1;
-}
-
-int Widget::getYBeginOfLine(QColor color, int x, int y)
-{
-    if(y<0)
-        return 0;
-    if(image.pixelColor(x,y) == color)
-        return getYBeginOfLine(color,x,y-1);
-    else
-        return y+1;
-}
-
-void Widget::fillColor(QPainter * painter, QColor color, int x, int y)
-{
-    if(x>image.size().rwidth()-1 || y>image.size().rheight()-1 || x<0 || y<0)
-        return;
-    if(image.pixelColor(x,y) == color)
-    {
-        QPolygon polygon;
-
-        for(int i=getYBeginOfLine(color,x,y);i<=getYEndOfLine(color,x,y);i++)
-            polygon << QPoint(getBeginOfLine(color,x,i),i);
-
-//        for(int i=getBeginOfLine(color,x,y);i<=getEndOfLine(color,x,y);i++)
-//            polygon << QPoint(i,getYEndOfLine(color,i,y));
-
-        for(int i=getYEndOfLine(color,x,y);i>=getYBeginOfLine(color,x,y);i--)
-            polygon << QPoint(getEndOfLine(color,x,i),i);
-
-//        for(int i=getEndOfLine(color,x,y);i>=getBeginOfLine(color,x,y);i--)
-//            polygon << QPoint(i,getYBeginOfLine(color,i,y));
-
-        painter->drawPolygon(polygon);
-
-        while(!polygon.isEmpty())
-        {
-            QPoint point = polygon.takeLast();
-
-            fillColor(painter,color,point.x()+1,point.y());
-            fillColor(painter,color,point.x()+1,point.y()-1);
-            fillColor(painter,color,point.x()+1,point.y()+1);
-
-            fillColor(painter,color,point.x()-1,point.y());
-            fillColor(painter,color,point.x()-1,point.y()-1);
-            fillColor(painter,color,point.x()-1,point.y()+1);
-
-            fillColor(painter,color,point.x(),point.y()+1);
-            fillColor(painter,color,point.x(),point.y()-1);
-        }
-        counterFill++;
-        qDebug() << counterFill <<" "<<x<<" "<<y;
-    }
-}
-
 void Widget::mouseMoveEvent(QMouseEvent * e)
 {
     memento.drawInit(image);
@@ -328,12 +247,9 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
     case FILL:
         if(image.pixelColor(x,y) != penColor)
         {
-            counterFill = 0;
             QColor color = image.pixelColor(x,y);
             p.setPen(QPen(penColor, 1));
-            p.setBrush(penColor);
-            fillColor(&p,color,x,y);
-            qDebug() << counterFill;
+            FillSpace fillSpace(&image,&p,color,x,y);
         }
         break;
     case COLOR_PICKER:
