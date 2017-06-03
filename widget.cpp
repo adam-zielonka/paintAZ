@@ -38,13 +38,18 @@ void Widget::setNewImage(int width, int height)
     memento.clear(image);
 }
 
-void Widget::loadImage(QString file)
+bool Widget::loadImage(QString file)
 {
-    image.load(file);
-    tempImage = image;
-    setMinimumSize(image.size().rwidth()*scale,image.size().rheight()*scale);
-    fileName = file;
-    memento.clear(image);
+    if(image.load(file))
+    {
+        tempImage = image;
+        setMinimumSize(image.size().rwidth()*scale,image.size().rheight()*scale);
+        fileName = file;
+        memento.clear(image);
+        return true;
+    }
+    else
+        return false;
 }
 
 void Widget::saveImage()
@@ -57,10 +62,15 @@ QString Widget::getFileName()
     return fileName;
 }
 
-void Widget::saveImage(QString file)
+bool Widget::saveImage(QString file)
 {
-    image.save(file);
-    fileName = file;
+    if(image.save(file))
+    {
+        fileName = file;
+        return true;
+    }
+    else
+        return false;
 }
 
 QColor Widget::getPenColor()

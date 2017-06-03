@@ -160,10 +160,28 @@ void MainWindow::on_actionNew_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    QString file = QFileDialog::getOpenFileName();
+    QString selfilter = tr("JPEG (*.jpg *.jpeg)");
+    QString file = QFileDialog::getOpenFileName(
+            this,
+            QString(),
+            QString(),
+            tr("All files (*.*);;BITMAP (*.bmp);;PNG (*.png);;JPEG (*.jpg *.jpeg);;TIFF (*.tif *.tiff)" ),
+            &selfilter
+    );
+
     if(file != "")
     {
-        mywidget->loadImage(file);
+        while(!mywidget->loadImage(file))
+        {
+            file = QFileDialog::getOpenFileName(
+                        this,
+                        QString(),
+                        QString(),
+                        tr("All files (*.*);;BITMAP (*.bmp);;PNG (*.png);;JPEG (*.jpg *.jpeg);;TIFF (*.tif *.tiff)" ),
+                        &selfilter
+            );
+            if(file == "") return;
+        }
         mywidget->update();
         ui->actionSave->setEnabled(true);
         updateWindowTitle();
@@ -177,10 +195,27 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionSave_As_triggered()
 {
-    QString file = QFileDialog::getSaveFileName();
+    QString selfilter = tr("JPEG (*.jpg *.jpeg)");
+    QString file = QFileDialog::getSaveFileName(
+            this,
+            QString(),
+            QString(),
+            tr("BITMAP (*.bmp);;PNG (*.png);;JPEG (*.jpg *.jpeg);;TIFF (*.tif *.tiff)" ),
+            &selfilter
+    );
     if(file != "")
     {
-        mywidget->saveImage(file);
+        while(!mywidget->saveImage(file))
+        {
+            file = QFileDialog::getSaveFileName(
+                        this,
+                        QString(),
+                        QString(),
+                        tr("BITMAP (*.bmp);;PNG (*.png);;JPEG (*.jpg *.jpeg);;TIFF (*.tif *.tiff)" ),
+                        &selfilter
+            );
+            if(file == "") return;
+        }
         ui->actionSave->setEnabled(true);
         updateWindowTitle();
     }

@@ -54,8 +54,8 @@ public:
     ~Widget();
 
     void setNewImage(int width, int height);
-    void loadImage(QString file);
-    void saveImage(QString file);
+    bool loadImage(QString file);
+    bool saveImage(QString file);
     void saveImage();
     QString getFileName();
 
