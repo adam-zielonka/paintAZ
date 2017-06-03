@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
     drawSizeSpinBox->setValue(1);
     ui->toolBarShape->addWidget(drawSizeSpinBox);
     mywidget->setDrawSize(drawSizeSpinBox);
+    setCursor(Qt::ArrowCursor);
 }
 
 MainWindow::~MainWindow()
@@ -104,25 +105,21 @@ void MainWindow::setItalicsFont()
 
 void MainWindow::on_actionDraw_triggered()
 {
-    setCursor(Qt::CrossCursor);
     mywidget->setDraw();
 }
 
 void MainWindow::on_actionDraw_Line_triggered()
 {
-    setCursor(Qt::CrossCursor);
     mywidget->setDrawLine();
 }
 
 void MainWindow::on_actionDraw_Rect_triggered()
 {
-    setCursor(Qt::CrossCursor);
     mywidget->setDrawRect();
 }
 
 void MainWindow::on_actionDraw_Ellipse_triggered()
 {
-    setCursor(Qt::CrossCursor);
     mywidget->setDrawEllipse();
 }
 
@@ -242,13 +239,11 @@ void MainWindow::on_actionZoom_to_Actual_Size_triggered()
 
 void MainWindow::on_actionText_triggered()
 {
-    setCursor(Qt::IBeamCursor);
     mywidget->setPaintText();
 }
 
 void MainWindow::on_actionCross_triggered()
 {
-    setCursor(Qt::CrossCursor);
     mywidget->setPaintDefault();
 }
 
@@ -265,7 +260,6 @@ void MainWindow::on_actionRedo_triggered()
 
 void MainWindow::on_actionDraw_Round_Rect_triggered()
 {
-    setCursor(Qt::CrossCursor);
     mywidget->setDrawRoundRect();
 }
 
@@ -283,18 +277,15 @@ void MainWindow::on_actionDraw_Size_Down_triggered()
 
 void MainWindow::on_actionFill_triggered()
 {
-    setCursor(Qt::PointingHandCursor);
     mywidget->setFill();
 }
 
 void MainWindow::on_actionColor_Picker_triggered()
 {
-    setCursor(Qt::ArrowCursor);
     mywidget->setColorPicker();
 }
 
 void MainWindow::on_actionErase_triggered()
 {
-    setCursor(Qt::BlankCursor);
     mywidget->setErase();
 }

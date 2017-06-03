@@ -292,11 +292,9 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
     else if(mode == ERASE)
     {
         QPainter p(GetImage());
-
         p.setPen(penColor);
         p.setBrush(brushColor);
         p.drawRect(e->x()/scale,e->y()/scale,10+drawSizeSpinBox->value(),10+drawSizeSpinBox->value());
-
         update();
     }
 }
@@ -343,6 +341,9 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
         penColorButton->setStyleSheet("background-color: "+getPenColor().name()+";");
         break;
     case ERASE:
+        p.setPen(brushColor);
+        p.setBrush(brushColor);
+        p.drawRect(e->x()/scale,e->y()/scale,10+drawSizeSpinBox->value(),10+drawSizeSpinBox->value());
         break;
     case TEXT:
         QFont font = QFont(fontComboBox->currentFont());
@@ -376,49 +377,64 @@ void Widget::paintEvent(QPaintEvent * event)
 
 void Widget::setDraw()
 {
+    setCursor(Qt::CrossCursor);
     mode = DRAW;
     update();
 }
 
 void Widget::setDrawLine()
 {
+    setCursor(Qt::CrossCursor);
     mode = DRAW_LINE;
+    tempImage = image;
     update();
 }
 
 void Widget::setDrawRect()
 {
+    setCursor(Qt::CrossCursor);
     mode = DRAW_RECT;
+    tempImage = image;
     update();
 }
 
 void Widget::setDrawEllipse()
 {
+    setCursor(Qt::CrossCursor);
     mode = DRAW_ELLIPSE;
+    tempImage = image;
     update();
 }
 
 void Widget::setDrawRoundRect()
 {
+    setCursor(Qt::CrossCursor);
     mode = DRAW_ROUND_RECT;
+    tempImage = image;
     update();
 }
 
 void Widget::setFill()
 {
+    setCursor(Qt::PointingHandCursor);
     mode = FILL;
+    tempImage = image;
     update();
 }
 
 void Widget::setColorPicker()
 {
+    setCursor(Qt::ArrowCursor);
     mode = COLOR_PICKER;
+    tempImage = image;
     update();
 }
 
 void Widget::setErase()
 {
+    setCursor(Qt::BlankCursor);
     mode = ERASE;
+    tempImage = image;
     update();
 }
 
@@ -502,12 +518,14 @@ void Widget::redoImage()
 
 void Widget::setPaintDefault()
 {
+    setCursor(Qt::CrossCursor);
     mode = DRAW;
     update();
 }
 
 void Widget::setPaintText()
 {
+    setCursor(Qt::IBeamCursor);
     mode = TEXT;
     update();
 }
