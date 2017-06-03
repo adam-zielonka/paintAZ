@@ -17,6 +17,7 @@
 #include <QPolygon>
 #include <QPoint>
 #include <QDebug>
+#include "memento.h"
 
 enum Mode{
     DRAW,
@@ -47,7 +48,7 @@ class Widget : public QWidget
     Q_OBJECT
 
 public:
-    explicit Widget(QWidget *parent = 0);
+    explicit Widget(QWidget *parent = 0, QAction * actionUndo = 0, QAction * actionRedo = 0);
     ~Widget();
 
     void setNewImage(int width, int height);
@@ -82,8 +83,6 @@ public:
 
     void setMouseLabel(QLabel *label);
 
-    void setUndoImage(QAction * undo);
-    void setRedoImage(QAction * redo);
     void undoImage();
     void redoImage();
 
@@ -116,12 +115,7 @@ private:
     qreal scale;
     QLabel * mouseLabel;
     void changeMouseLabel(int x, int y);
-    QAction * undo;
-    QAction * redo;
-    QList<QImage> imageListUndo;
-    QList<QImage> imageListRedo;
-    bool undoAgain;
-    bool redoAgain;
+    Memento memento;
     QLineEdit * textEdit;
     QSpinBox * fontSizeSpinBox;
     QFontComboBox * fontComboBox;

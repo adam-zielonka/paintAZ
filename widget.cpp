@@ -1,11 +1,12 @@
 #include "widget.h"
 #include "ui_widget.h"
 
-Widget::Widget(QWidget *parent) :
+Widget::Widget(QWidget *parent, QAction * actionUndo, QAction * actionRedo) :
     QWidget(parent),
     ui(new Ui::Widget),
     image(800,600, QImage::Format_RGB32),
-    tempImage(800,600, QImage::Format_RGB32)
+    tempImage(800,600, QImage::Format_RGB32),
+    memento(actionUndo, actionRedo)
 {
     penColor = QColor(Qt::black);
     brushColor = QColor(Qt::white);
@@ -18,7 +19,6 @@ Widget::Widget(QWidget *parent) :
     setMinimumSize(800*scale,600*scale);
     fileName = "";
     setMouseTracking(true);
-    imageListUndo << image;
     boldFont = false;
     italicsFont = false;
 }
@@ -35,9 +35,7 @@ void Widget::setNewImage(int width, int height)
     image.fill(Qt::white);
     tempImage = image;
     fileName = "";
-    imageListUndo.clear();
-    imageListUndo << image;
-    imageListRedo.clear();
+    memento.clear(image);
 }
 
 void Widget::loadImage(QString file)
@@ -46,9 +44,7 @@ void Widget::loadImage(QString file)
     tempImage = image;
     setMinimumSize(image.size().rwidth()*scale,image.size().rheight()*scale);
     fileName = file;
-    imageListUndo.clear();
-    imageListUndo << image;
-    imageListRedo.clear();
+    memento.clear(image);
 }
 
 void Widget::saveImage()
@@ -221,11 +217,7 @@ void Widget::fillColor(QPainter * painter, QColor color, int x, int y)
 
 void Widget::mouseMoveEvent(QMouseEvent * e)
 {
-    if(undoAgain)
-    {
-        imageListUndo << image;
-        undoAgain = false;
-    }
+    memento.drawInit(image);
 
     changeMouseLabel(e->x(),e->y());
     if(e->buttons() == Qt::LeftButton)
@@ -271,11 +263,7 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
 
 void Widget::mouseReleaseEvent(QMouseEvent * e)
 {
-    if(undoAgain)
-    {
-        imageListUndo << image;
-        undoAgain = false;
-    }
+    memento.drawInit(image);
 
     QPainter p(&image);
     p.setPen(QPen(penColor, drawSizeSpinBox->value()));
@@ -323,13 +311,7 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
     lastX = e->x()/scale;
     lastY = e->y()/scale;
 
-    imageListUndo << image;
-    undo->setEnabled(true);
-    undoAgain = false;
-
-    imageListRedo.clear();
-    redo->setEnabled(false);
-    redoAgain = false;
+    memento.mementoImage(image);
 
     update();
 }
@@ -438,59 +420,15 @@ void Widget::setMouseLabel(QLabel *label)
     mouseLabel = label;
 }
 
-void Widget::setUndoImage(QAction *undo)
-{
-    this->undo = undo;
-}
-
-void Widget::setRedoImage(QAction *redo)
-{
-    this->redo = redo;
-}
-
 void Widget::undoImage()
 {
-    if(!undoAgain)
-    {
-        imageListRedo << imageListUndo.takeLast();
-    }
-    undoAgain = true;
-    redoAgain = false;
-    image = tempImage = imageListUndo.takeLast();
-    if(!imageListUndo.isEmpty())
-        undo->setEnabled(true);
-    else
-    {
-        undo->setEnabled(false);
-        imageListUndo << image;
-    }
-
-    redo->setEnabled(true);
-    imageListRedo << image;
-
+    image = tempImage = memento.undoImage();
     update();
 }
 
 void Widget::redoImage()
 {
-    if(!redoAgain)
-    {
-        if(imageListUndo.size() != 1)
-            imageListUndo << imageListRedo.takeLast();
-        else
-            imageListRedo.takeLast();
-    }
-    redoAgain = true;
-    undoAgain = false;
-    image = tempImage = imageListRedo.takeLast();
-    if(!imageListRedo.isEmpty())
-        redo->setEnabled(true);
-    else
-        redo->setEnabled(false);
-
-    undo->setEnabled(true);
-    imageListUndo << image;
-
+    image = tempImage = memento.redoImage();
     update();
 }
 

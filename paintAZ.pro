@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         widget.cpp \
     mainwindow.cpp \
-    newfiledialog.cpp
+    newfiledialog.cpp \
+    memento.cpp
 
 HEADERS  += widget.h \
     mainwindow.h \
-    newfiledialog.h
+    newfiledialog.h \
+    memento.h
 
 FORMS    += widget.ui \
     mainwindow.ui \

@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    mywidget = new Widget(this);
+    mywidget = new Widget(this,ui->actionUndo,ui->actionRedo);
     scrollArea = new QScrollArea(this);
     scrollArea->setWidget(mywidget);
     scrollArea->setWidgetResizable(true);
@@ -29,9 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
     mouseLabel = new QLabel(this);
     ui->statusbar->addPermanentWidget(mouseLabel);
     mywidget->setMouseLabel(mouseLabel);
-
-    mywidget->setUndoImage(ui->actionUndo);
-    mywidget->setRedoImage(ui->actionRedo);
 
     fontComboBox = new QFontComboBox(this);
     fontSizeSpinBox = new QSpinBox(this);
