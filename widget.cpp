@@ -12,6 +12,7 @@ Widget::Widget(QWidget *parent, QAction * actionUndo, QAction * actionRedo) :
     brushColor = QColor(Qt::white);
     ui->setupUi(this);
     image.fill(Qt::white);
+    tempImage = image;
     mode = DRAW;
     shape = NORMAL;
     brush = NONE;
@@ -136,7 +137,8 @@ bool Widget::IsTempImage()
     return (mode == DRAW_LINE ||
             mode == DRAW_RECT ||
             mode == DRAW_ROUND_RECT ||
-            mode == DRAW_ELLIPSE);
+            mode == DRAW_ELLIPSE ||
+            mode == ERASE);
 }
 
 void Widget::changeMouseLabel(int x, int y)
@@ -271,9 +273,29 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
             break;
         case COLOR_PICKER:
             break;
+        case ERASE:
+            p.setPen(penColor);
+            p.setBrush(brushColor);
+            p.drawRect(e->x()/scale,e->y()/scale,10+drawSizeSpinBox->value(),10+drawSizeSpinBox->value());
+            p.end();
+            p.begin(&image);
+            p.setPen(brushColor);
+            p.setBrush(brushColor);
+            p.drawRect(e->x()/scale,e->y()/scale,10+drawSizeSpinBox->value(),10+drawSizeSpinBox->value());
+            break;
         case TEXT:
             break;
         }
+
+        update();
+    }
+    else if(mode == ERASE)
+    {
+        QPainter p(GetImage());
+
+        p.setPen(penColor);
+        p.setBrush(brushColor);
+        p.drawRect(e->x()/scale,e->y()/scale,10+drawSizeSpinBox->value(),10+drawSizeSpinBox->value());
 
         update();
     }
@@ -320,6 +342,8 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
         setPenColor(image.pixelColor(x,y));
         penColorButton->setStyleSheet("background-color: "+getPenColor().name()+";");
         break;
+    case ERASE:
+        break;
     case TEXT:
         QFont font = QFont(fontComboBox->currentFont());
         font.setPointSize(fontSizeSpinBox->value());
@@ -353,56 +377,73 @@ void Widget::paintEvent(QPaintEvent * event)
 void Widget::setDraw()
 {
     mode = DRAW;
+    update();
 }
 
 void Widget::setDrawLine()
 {
     mode = DRAW_LINE;
+    update();
 }
 
 void Widget::setDrawRect()
 {
     mode = DRAW_RECT;
+    update();
 }
 
 void Widget::setDrawEllipse()
 {
     mode = DRAW_ELLIPSE;
+    update();
 }
 
 void Widget::setDrawRoundRect()
 {
     mode = DRAW_ROUND_RECT;
+    update();
 }
 
 void Widget::setFill()
 {
     mode = FILL;
+    update();
 }
 
 void Widget::setColorPicker()
 {
     mode = COLOR_PICKER;
+    update();
+}
+
+void Widget::setErase()
+{
+    mode = ERASE;
+    update();
 }
 
 void Widget::setShapeNormal()
 {
     shape = NORMAL;
+    update();
 }
 
 void Widget::setShapeEqual()
 {
     shape = EQUAL;
+    update();
 }
 
 void Widget::setBrushNone()
 {
     brush = NONE;
+    update();
 }
 
 void Widget::setBrushFull()
 {
     brush = FULL;
+    update();
 }
 
 bool Widget::zoomIn()
@@ -462,11 +503,13 @@ void Widget::redoImage()
 void Widget::setPaintDefault()
 {
     mode = DRAW;
+    update();
 }
 
 void Widget::setPaintText()
 {
     mode = TEXT;
+    update();
 }
 
 void Widget::setTextEdit(QLineEdit * textEdit,QSpinBox * fontSizeSpinBox,QFontComboBox * fontComboBox)

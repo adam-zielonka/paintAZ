@@ -72,10 +72,11 @@
     <property name="title">
      <string>Cursor</string>
     </property>
-    <addaction name="actionText"/>
     <addaction name="actionCross"/>
+    <addaction name="actionText"/>
     <addaction name="actionFill"/>
     <addaction name="actionColor_Picker"/>
+    <addaction name="actionErase"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -127,6 +128,7 @@
    <addaction name="actionText"/>
    <addaction name="actionFill"/>
    <addaction name="actionColor_Picker"/>
+   <addaction name="actionErase"/>
    <addaction name="separator"/>
    <addaction name="actionNone"/>
    <addaction name="actionFull"/>
@@ -448,6 +450,18 @@
    </property>
    <property name="shortcut">
     <string>F4</string>
+   </property>
+  </action>
+  <action name="actionErase">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/icons/icons8-Erase-50.png</normaloff>:/icons/icons/icons8-Erase-50.png</iconset>
+   </property>
+   <property name="text">
+    <string>Erase</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
    </property>
   </action>
  </widget>

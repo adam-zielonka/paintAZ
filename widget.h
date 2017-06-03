@@ -28,6 +28,7 @@ enum Mode{
     DRAW_ELLIPSE,
     FILL,
     COLOR_PICKER,
+    ERASE,
     TEXT
 };
 
@@ -74,6 +75,7 @@ public:
     void setDrawRoundRect();
     void setFill();
     void setColorPicker();
+    void setErase();
 
     void setShapeNormal();
     void setShapeEqual();

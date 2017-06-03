@@ -272,11 +272,13 @@ void MainWindow::on_actionDraw_Round_Rect_triggered()
 void MainWindow::on_actionDraw_Size_Up_triggered()
 {
     drawSizeSpinBox->setValue(drawSizeSpinBox->value()+1);
+    mywidget->update();
 }
 
 void MainWindow::on_actionDraw_Size_Down_triggered()
 {
     drawSizeSpinBox->setValue(drawSizeSpinBox->value()-1);
+    mywidget->update();
 }
 
 void MainWindow::on_actionFill_triggered()
@@ -289,4 +291,10 @@ void MainWindow::on_actionColor_Picker_triggered()
 {
     setCursor(Qt::ArrowCursor);
     mywidget->setColorPicker();
+}
+
+void MainWindow::on_actionErase_triggered()
+{
+    setCursor(Qt::BlankCursor);
+    mywidget->setErase();
 }

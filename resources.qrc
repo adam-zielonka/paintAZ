@@ -24,5 +24,6 @@
         <file>icons/Fill Color-50.png</file>
         <file>icons/icons8-Color Dropper-50.png</file>
         <file>icons/icons8-Pencil-50.png</file>
+        <file>icons/icons8-Erase-50.png</file>
     </qresource>
 </RCC>

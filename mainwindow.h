@@ -95,6 +95,8 @@ private slots:
 
     void on_actionColor_Picker_triggered();
 
+    void on_actionErase_triggered();
+
 private:
     Ui::MainWindow *ui;
     Widget *mywidget;
