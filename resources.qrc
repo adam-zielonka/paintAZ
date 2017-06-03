@@ -23,5 +23,6 @@
         <file>icons/Minus-50.png</file>
         <file>icons/Plus-50.png</file>
         <file>icons/Fill Color-50.png</file>
+        <file>icons/icons8-Color Dropper-50.png</file>
     </qresource>
 </RCC>

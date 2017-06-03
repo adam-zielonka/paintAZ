@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolBar->addWidget(brushColorButton);
     connect(brushColorButton,SIGNAL(clicked()),this,SLOT(setBrushColor()));
 
+    mywidget->setColorButtons(penColorButton,brushColorButton);
+
     newFile = new NewFileDialog();
 
     updateWindowTitle();
@@ -246,4 +248,10 @@ void MainWindow::on_actionFill_triggered()
 {
     setCursor(Qt::PointingHandCursor);
     mywidget->setFill();
+}
+
+void MainWindow::on_actionColor_Picker_triggered()
+{
+    setCursor(Qt::ArrowCursor);
+    mywidget->setColorPicker();
 }

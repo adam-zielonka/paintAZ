@@ -17,6 +17,7 @@
 #include <QPolygon>
 #include <QPoint>
 #include <QDebug>
+#include <QPushButton>
 #include "memento.h"
 
 enum Mode{
@@ -26,6 +27,7 @@ enum Mode{
     DRAW_ROUND_RECT,
     DRAW_ELLIPSE,
     FILL,
+    COLOR_PICKER,
     TEXT
 };
 
@@ -61,6 +63,7 @@ public:
     void setPenColor(QColor color);
     QColor getBrushColor();
     void setBrushColor(QColor color);
+    void setColorButtons(QPushButton * penColorButton, QPushButton * brushColorButton);
 
     void setDrawSize(QSpinBox * drawSizeSpinBox);
 
@@ -70,6 +73,7 @@ public:
     void setDrawEllipse();
     void setDrawRoundRect();
     void setFill();
+    void setColorPicker();
 
     void setShapeNormal();
     void setShapeEqual();
@@ -98,6 +102,8 @@ private:
     QImage tempImage;
     QColor penColor;
     QColor brushColor;
+    QPushButton * penColorButton;
+    QPushButton * brushColorButton;
     int lastX;
     int lastY;
     int actualX;

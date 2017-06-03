@@ -93,6 +93,8 @@ private slots:
 
     void on_actionFill_triggered();
 
+    void on_actionColor_Picker_triggered();
+
 private:
     Ui::MainWindow *ui;
     Widget *mywidget;

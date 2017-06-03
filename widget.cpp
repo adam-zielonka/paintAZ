@@ -83,6 +83,12 @@ void Widget::setBrushColor(QColor color)
     brushColor = color;
 }
 
+void Widget::setColorButtons(QPushButton *penColorButton, QPushButton *brushColorButton)
+{
+    this->penColorButton = penColorButton;
+    this->brushColorButton = brushColorButton;
+}
+
 void Widget::setDrawSize(QSpinBox * drawSizeSpinBox)
 {
     this->drawSizeSpinBox = drawSizeSpinBox;
@@ -253,6 +259,8 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
             break;
         case FILL:
             break;
+        case COLOR_PICKER:
+            break;
         case TEXT:
             break;
         }
@@ -264,6 +272,8 @@ void Widget::mouseMoveEvent(QMouseEvent * e)
 void Widget::mouseReleaseEvent(QMouseEvent * e)
 {
     memento.drawInit(image);
+    int x = e->x()/scale;
+    int y = e->y()/scale;
 
     QPainter p(&image);
     p.setPen(QPen(penColor, drawSizeSpinBox->value()));
@@ -274,23 +284,21 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
     case DRAW:
         break;
     case DRAW_LINE:
-        p.drawLine(e->x()/scale,e->y()/scale,lastX,lastY);
+        p.drawLine(x,y,lastX,lastY);
         break;
     case DRAW_RECT:
-        p.drawRect(GetRect(e->x()/scale,e->y()/scale));
+        p.drawRect(GetRect(x,y));
         break;
     case DRAW_ROUND_RECT:
-        p.drawRoundRect(GetRect(e->x()/scale,e->y()/scale));
+        p.drawRoundRect(GetRect(x,y));
         break;
     case DRAW_ELLIPSE:
-        p.drawEllipse(GetRect(e->x()/scale,e->y()/scale));
+        p.drawEllipse(GetRect(x,y));
         break;
     case FILL:
-        if(image.pixelColor(e->x()/scale,e->y()/scale) != penColor)
+        if(image.pixelColor(x,y) != penColor)
         {
             counterFill = 0;
-            int x = e->x()/scale;
-            int y = e->y()/scale;
             QColor color = image.pixelColor(x,y);
             p.setPen(QPen(penColor, 1));
             p.setBrush(penColor);
@@ -298,18 +306,22 @@ void Widget::mouseReleaseEvent(QMouseEvent * e)
             qDebug() << counterFill;
         }
         break;
+    case COLOR_PICKER:
+        setPenColor(image.pixelColor(x,y));
+        penColorButton->setStyleSheet("background-color: "+getPenColor().name()+";");
+        break;
     case TEXT:
         QFont font = QFont(fontComboBox->currentFont());
         font.setPointSize(fontSizeSpinBox->value());
         font.setBold(boldFont);
         font.setItalic(italicsFont);
         p.setFont(font);
-        p.drawText(e->x()/scale,e->y()/scale,textEdit->text());
+        p.drawText(x,y,textEdit->text());
         break;
     }
 
-    lastX = e->x()/scale;
-    lastY = e->y()/scale;
+    lastX = x;
+    lastY = y;
 
     memento.mementoImage(image);
 
@@ -356,6 +368,11 @@ void Widget::setDrawRoundRect()
 void Widget::setFill()
 {
     mode = FILL;
+}
+
+void Widget::setColorPicker()
+{
+    mode = COLOR_PICKER;
 }
 
 void Widget::setShapeNormal()
