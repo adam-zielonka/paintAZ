@@ -168,7 +168,7 @@
   <action name="actionDraw">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Brush-26.png</normaloff>:/icons/icons/Brush-26.png</iconset>
+     <normaloff>:/icons/icons/icons8-Pencil-50.png</normaloff>:/icons/icons/icons8-Pencil-50.png</iconset>
    </property>
    <property name="text">
     <string>Draw</string>
