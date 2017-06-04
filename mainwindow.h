@@ -39,6 +39,8 @@ public:
     QPushButton * boldFontButton;
     QPushButton * italicsFontButton;
     QSpinBox * drawSizeSpinBox;
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
 
 public slots:
     void setPenColor();

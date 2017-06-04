@@ -71,6 +71,22 @@ void MainWindow::updateWindowTitle()
         setWindowTitle("paintAZ - "+mywidget->getFileName());
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Shift)
+    {
+        mywidget->setShapeEqual();
+    }
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Shift)
+    {
+        mywidget->setShapeNormal();
+    }
+}
+
 void MainWindow::setPenColor()
 {
     mywidget->setPenColor(QColorDialog::getColor());
