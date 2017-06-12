@@ -25,5 +25,32 @@
         <file>icons/icons8-Color Dropper-50.png</file>
         <file>icons/icons8-Pencil-50.png</file>
         <file>icons/icons8-Erase-50.png</file>
+        <file>icons/icons8-Paint Palette-50.png</file>
+        <file>color/icons8-Eraser-48.png</file>
+        <file>color/icons8-Paint Palette-48.png</file>
+        <file>color/icons8-Add File-48.png</file>
+        <file>color/icons8-Open-48.png</file>
+        <file>color/icons8-Redo-48.png</file>
+        <file>color/icons8-Save as-48.png</file>
+        <file>color/icons8-Save-48.png</file>
+        <file>color/icons8-Undo-48.png</file>
+        <file>color/icons8-Search-48.png</file>
+        <file>color/icons8-Zoom Out-48.png</file>
+        <file>color/icons8-Zoom In-48.png</file>
+        <file>color/icons8-Rectangle-48.png</file>
+        <file>color/icons8-Ellipse-48.png</file>
+        <file>color/icons8-Rounded Rectangle-48.png</file>
+        <file>color/icons8-Line-48.png</file>
+        <file>color/icons8-Sign Up-48.png</file>
+        <file>color/icons8-Text Box-48.png</file>
+        <file>color/icons8-Plus Math-48.png</file>
+        <file>color/icons8-Minus-48.png</file>
+        <file>color/icons8-Plus-48.png</file>
+        <file>color/icons8-One To One-48.png</file>
+        <file>color/icons8-One To Many-48.png</file>
+        <file>color/icons8-Fill Color-48.png</file>
+        <file>color/icons8-No Paint-48.png</file>
+        <file>color/icons8-Paint Bucket-48.png</file>
+        <file>color/icons8-Color Dropper-48.png</file>
     </qresource>
 </RCC>

@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/color/icons8-Paint Palette-48.png</normaloff>:/icons/color/icons8-Paint Palette-48.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -28,7 +32,7 @@
    </property>
    <widget class="QMenu" name="menuDraw_Mode">
     <property name="title">
-     <string>Draw Mode</string>
+     <string>Draw &amp;Mode</string>
     </property>
     <addaction name="actionDraw"/>
     <addaction name="actionDraw_Line"/>
@@ -38,7 +42,7 @@
    </widget>
    <widget class="QMenu" name="menuShape">
     <property name="title">
-     <string>Shape</string>
+     <string>&amp;Shape</string>
     </property>
     <addaction name="separator"/>
     <addaction name="actionNormal"/>
@@ -46,14 +50,14 @@
    </widget>
    <widget class="QMenu" name="menuBrush">
     <property name="title">
-     <string>Brush</string>
+     <string>&amp;Brush</string>
     </property>
     <addaction name="actionNone"/>
     <addaction name="actionFull"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
@@ -62,7 +66,7 @@
    </widget>
    <widget class="QMenu" name="menuZoom">
     <property name="title">
-     <string>Zoom</string>
+     <string>&amp;Zoom</string>
     </property>
     <addaction name="actionZoom_In"/>
     <addaction name="actionZoom_Out"/>
@@ -70,7 +74,7 @@
    </widget>
    <widget class="QMenu" name="menuPast">
     <property name="title">
-     <string>Cursor</string>
+     <string>&amp;Cursor</string>
     </property>
     <addaction name="actionCross"/>
     <addaction name="actionText"/>
@@ -80,14 +84,14 @@
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
-     <string>Edit</string>
+     <string>&amp;Edit</string>
     </property>
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
    </widget>
    <widget class="QMenu" name="menuDraw_Size">
     <property name="title">
-     <string>Draw Size</string>
+     <string>&amp;Draw Size</string>
     </property>
     <addaction name="actionDraw_Size_Up"/>
     <addaction name="actionDraw_Size_Down"/>
@@ -130,9 +134,6 @@
    <addaction name="actionColor_Picker"/>
    <addaction name="actionErase"/>
    <addaction name="separator"/>
-   <addaction name="actionNone"/>
-   <addaction name="actionFull"/>
-   <addaction name="separator"/>
   </widget>
   <widget class="QToolBar" name="toolBarText">
    <property name="windowTitle">
@@ -161,16 +162,22 @@
    <addaction name="actionDraw_Round_Rect"/>
    <addaction name="actionDraw_Ellipse"/>
    <addaction name="separator"/>
+   <addaction name="actionNone"/>
+   <addaction name="actionFull"/>
+   <addaction name="separator"/>
+   <addaction name="actionNormal"/>
+   <addaction name="actionEqual"/>
+   <addaction name="separator"/>
    <addaction name="actionDraw_Size_Up"/>
    <addaction name="actionDraw_Size_Down"/>
   </widget>
   <action name="actionDraw">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/icons8-Pencil-50.png</normaloff>:/icons/icons/icons8-Pencil-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Sign Up-48.png</normaloff>:/icons/color/icons8-Sign Up-48.png</iconset>
    </property>
    <property name="text">
-    <string>Draw</string>
+    <string>&amp;Draw</string>
    </property>
    <property name="shortcut">
     <string>1</string>
@@ -179,10 +186,10 @@
   <action name="actionDraw_Line">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Line-64.png</normaloff>:/icons/icons/Line-64.png</iconset>
+     <normaloff>:/icons/color/icons8-Line-48.png</normaloff>:/icons/color/icons8-Line-48.png</iconset>
    </property>
    <property name="text">
-    <string>Draw Line</string>
+    <string>Draw &amp;Line</string>
    </property>
    <property name="shortcut">
     <string>2</string>
@@ -191,10 +198,10 @@
   <action name="actionDraw_Rect">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Rectangle Stroked-64.png</normaloff>:/icons/icons/Rectangle Stroked-64.png</iconset>
+     <normaloff>:/icons/color/icons8-Rectangle-48.png</normaloff>:/icons/color/icons8-Rectangle-48.png</iconset>
    </property>
    <property name="text">
-    <string>Draw Rect</string>
+    <string>Draw &amp;Rect</string>
    </property>
    <property name="shortcut">
     <string>3</string>
@@ -203,10 +210,10 @@
   <action name="actionDraw_Ellipse">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Ellipse Stroked-64.png</normaloff>:/icons/icons/Ellipse Stroked-64.png</iconset>
+     <normaloff>:/icons/color/icons8-Ellipse-48.png</normaloff>:/icons/color/icons8-Ellipse-48.png</iconset>
    </property>
    <property name="text">
-    <string>Draw Ellipse</string>
+    <string>Draw &amp;Ellipse</string>
    </property>
    <property name="shortcut">
     <string>5</string>
@@ -215,46 +222,46 @@
   <action name="actionNormal">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Not Equal-64.png</normaloff>:/icons/icons/Not Equal-64.png</iconset>
+     <normaloff>:/icons/color/icons8-One To Many-48.png</normaloff>:/icons/color/icons8-One To Many-48.png</iconset>
    </property>
    <property name="text">
-    <string>Normal</string>
+    <string>&amp;Normal</string>
    </property>
   </action>
   <action name="actionEqual">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Equal Sign-64.png</normaloff>:/icons/icons/Equal Sign-64.png</iconset>
+     <normaloff>:/icons/color/icons8-One To One-48.png</normaloff>:/icons/color/icons8-One To One-48.png</iconset>
    </property>
    <property name="text">
-    <string>Equal</string>
+    <string>&amp;Equal</string>
    </property>
   </action>
   <action name="actionNone">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Roller Brush-50.png</normaloff>:/icons/icons/Roller Brush-50.png</iconset>
+     <normaloff>:/icons/color/icons8-No Paint-48.png</normaloff>:/icons/color/icons8-No Paint-48.png</iconset>
    </property>
    <property name="text">
-    <string>None</string>
+    <string>&amp;None</string>
    </property>
   </action>
   <action name="actionFull">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Roller Brush Filled-50.png</normaloff>:/icons/icons/Roller Brush Filled-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Paint Bucket-48.png</normaloff>:/icons/color/icons8-Paint Bucket-48.png</iconset>
    </property>
    <property name="text">
-    <string>Full</string>
+    <string>&amp;Full</string>
    </property>
   </action>
   <action name="actionNew">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/New File-50.png</normaloff>:/icons/icons/New File-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Add File-48.png</normaloff>:/icons/color/icons8-Add File-48.png</iconset>
    </property>
    <property name="text">
-    <string>New</string>
+    <string>&amp;New</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -263,10 +270,10 @@
   <action name="actionOpen">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Open Folder-50.png</normaloff>:/icons/icons/Open Folder-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Open-48.png</normaloff>:/icons/color/icons8-Open-48.png</iconset>
    </property>
    <property name="text">
-    <string>Open</string>
+    <string>&amp;Open</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -278,10 +285,10 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Save-50.png</normaloff>:/icons/icons/Save-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Save-48.png</normaloff>:/icons/color/icons8-Save-48.png</iconset>
    </property>
    <property name="text">
-    <string>Save</string>
+    <string>&amp;Save</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -290,10 +297,10 @@
   <action name="actionSave_As">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Save as-50.png</normaloff>:/icons/icons/Save as-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Save as-48.png</normaloff>:/icons/color/icons8-Save as-48.png</iconset>
    </property>
    <property name="text">
-    <string>Save As</string>
+    <string>Save &amp;As</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
@@ -302,10 +309,10 @@
   <action name="actionZoom_In">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Zoom In-50.png</normaloff>:/icons/icons/Zoom In-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Zoom In-48.png</normaloff>:/icons/color/icons8-Zoom In-48.png</iconset>
    </property>
    <property name="text">
-    <string>Zoom In</string>
+    <string>Zoom &amp;In</string>
    </property>
    <property name="shortcut">
     <string>Ctrl++</string>
@@ -314,10 +321,10 @@
   <action name="actionZoom_Out">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Zoom Out-50.png</normaloff>:/icons/icons/Zoom Out-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Zoom Out-48.png</normaloff>:/icons/color/icons8-Zoom Out-48.png</iconset>
    </property>
    <property name="text">
-    <string>Zoom Out</string>
+    <string>Zoom &amp;Out</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+-</string>
@@ -326,10 +333,10 @@
   <action name="actionZoom_to_Actual_Size">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Zoom to Actual Size-50.png</normaloff>:/icons/icons/Zoom to Actual Size-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Search-48.png</normaloff>:/icons/color/icons8-Search-48.png</iconset>
    </property>
    <property name="text">
-    <string>Zoom to Actual Size</string>
+    <string>Zoom to &amp;Actual Size</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+0</string>
@@ -338,10 +345,10 @@
   <action name="actionText">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Text Box-50.png</normaloff>:/icons/icons/Text Box-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Text Box-48.png</normaloff>:/icons/color/icons8-Text Box-48.png</iconset>
    </property>
    <property name="text">
-    <string>Text</string>
+    <string>&amp;Text</string>
    </property>
    <property name="shortcut">
     <string>F2</string>
@@ -353,10 +360,10 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Undo-50.png</normaloff>:/icons/icons/Undo-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Undo-48.png</normaloff>:/icons/color/icons8-Undo-48.png</iconset>
    </property>
    <property name="text">
-    <string>Undo</string>
+    <string>&amp;Undo</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Z</string>
@@ -368,10 +375,10 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Redo-50.png</normaloff>:/icons/icons/Redo-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Redo-48.png</normaloff>:/icons/color/icons8-Redo-48.png</iconset>
    </property>
    <property name="text">
-    <string>Redo</string>
+    <string>&amp;Redo</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Y</string>
@@ -380,10 +387,10 @@
   <action name="actionCross">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/cross.png</normaloff>:/icons/icons/cross.png</iconset>
+     <normaloff>:/icons/color/icons8-Plus Math-48.png</normaloff>:/icons/color/icons8-Plus Math-48.png</iconset>
    </property>
    <property name="text">
-    <string>Cross</string>
+    <string>&amp;Cross</string>
    </property>
    <property name="shortcut">
     <string>F1</string>
@@ -392,10 +399,10 @@
   <action name="actionDraw_Size_Up">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Plus-50.png</normaloff>:/icons/icons/Plus-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Plus-48.png</normaloff>:/icons/color/icons8-Plus-48.png</iconset>
    </property>
    <property name="text">
-    <string>Draw Size Up</string>
+    <string>Draw Size &amp;Up</string>
    </property>
    <property name="shortcut">
     <string>+</string>
@@ -404,10 +411,10 @@
   <action name="actionDraw_Size_Down">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Minus-50.png</normaloff>:/icons/icons/Minus-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Minus-48.png</normaloff>:/icons/color/icons8-Minus-48.png</iconset>
    </property>
    <property name="text">
-    <string>Draw Size Down</string>
+    <string>Draw Size &amp;Down</string>
    </property>
    <property name="shortcut">
     <string>-</string>
@@ -416,10 +423,10 @@
   <action name="actionDraw_Round_Rect">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Rounded Rectangle Stroked-50.png</normaloff>:/icons/icons/Rounded Rectangle Stroked-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Rounded Rectangle-48.png</normaloff>:/icons/color/icons8-Rounded Rectangle-48.png</iconset>
    </property>
    <property name="text">
-    <string>Draw Round Rect</string>
+    <string>Draw R&amp;ound Rect</string>
    </property>
    <property name="shortcut">
     <string>4</string>
@@ -428,10 +435,10 @@
   <action name="actionFill">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/Fill Color-50.png</normaloff>:/icons/icons/Fill Color-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Fill Color-48.png</normaloff>:/icons/color/icons8-Fill Color-48.png</iconset>
    </property>
    <property name="text">
-    <string>Fill</string>
+    <string>&amp;Fill</string>
    </property>
    <property name="shortcut">
     <string>F3</string>
@@ -440,10 +447,10 @@
   <action name="actionColor_Picker">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/icons8-Color Dropper-50.png</normaloff>:/icons/icons/icons8-Color Dropper-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Color Dropper-48.png</normaloff>:/icons/color/icons8-Color Dropper-48.png</iconset>
    </property>
    <property name="text">
-    <string>Color Picker</string>
+    <string>Color &amp;Picker</string>
    </property>
    <property name="shortcut">
     <string>F4</string>
@@ -452,10 +459,10 @@
   <action name="actionErase">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/icons8-Erase-50.png</normaloff>:/icons/icons/icons8-Erase-50.png</iconset>
+     <normaloff>:/icons/color/icons8-Eraser-48.png</normaloff>:/icons/color/icons8-Eraser-48.png</iconset>
    </property>
    <property name="text">
-    <string>Erase</string>
+    <string>&amp;Erase</string>
    </property>
    <property name="shortcut">
     <string>F5</string>

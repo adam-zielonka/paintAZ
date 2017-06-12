@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Create new file</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/color/icons8-Paint Palette-48.png</normaloff>:/icons/color/icons8-Paint Palette-48.png</iconset>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
@@ -54,7 +58,9 @@
   <tabstop>lineEditWidth</tabstop>
   <tabstop>lineEditHeight</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
