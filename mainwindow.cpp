@@ -89,14 +89,22 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
 
 void MainWindow::setPenColor()
 {
-    mywidget->setPenColor(QColorDialog::getColor());
-    penColorButton->setStyleSheet("background-color: "+mywidget->getPenColor().name()+";");
+    QColor color = QColorDialog::getColor(mywidget->getPenColor(),this);
+    if(color.isValid())
+    {
+        mywidget->setPenColor(color);
+        penColorButton->setStyleSheet("background-color: "+mywidget->getPenColor().name()+";");
+    }
 }
 
 void MainWindow::setBrushColor()
 {
-    mywidget->setBrushColor(QColorDialog::getColor());
-    brushColorButton->setStyleSheet("background-color: "+mywidget->getBrushColor().name()+";");
+    QColor color = QColorDialog::getColor(mywidget->getPenColor(),this);
+    if(color.isValid())
+    {
+        mywidget->setBrushColor(color);
+        brushColorButton->setStyleSheet("background-color: "+mywidget->getBrushColor().name()+";");
+    }
 }
 
 void MainWindow::setBoldFont()
