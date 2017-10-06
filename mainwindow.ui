@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDraw_Mode">
@@ -170,6 +170,17 @@
    <addaction name="separator"/>
    <addaction name="actionDraw_Size_Up"/>
    <addaction name="actionDraw_Size_Down"/>
+  </widget>
+  <widget class="QToolBar" name="toolBarAbout">
+   <property name="windowTitle">
+    <string>About</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>BottomToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <action name="actionDraw">
    <property name="icon">

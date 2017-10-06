@@ -15,6 +15,7 @@
 #include <QSpinBox>
 #include <QLineEdit>
 #include <QFont>
+#include <QDesktopServices>
 
 namespace Ui {
 class MainWindow;
@@ -41,12 +42,16 @@ public:
     QSpinBox * drawSizeSpinBox;
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
+    QPushButton *icons8Link;
+    QPushButton *myLink;
 
 public slots:
     void setPenColor();
     void setBrushColor();
     void setBoldFont();
     void setItalicsFont();
+    void icons8LinkClicked();
+    void myLinkClicked();
 
 private slots:
     void on_actionDraw_triggered();

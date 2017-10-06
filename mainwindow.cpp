@@ -56,6 +56,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolBarShape->addWidget(drawSizeSpinBox);
     mywidget->setDrawSize(drawSizeSpinBox);
     setCursor(Qt::ArrowCursor);
+
+    icons8Link = new QPushButton(this);
+    icons8Link->setText(" icons8.com ");
+    icons8Link->setStyleSheet("text-decoration: underline; color: blue");
+    myLink = new QPushButton(this);
+    myLink->setText(" adamzielonka.pro ");
+    myLink->setStyleSheet("text-decoration: underline; color: blue");
+    ui->toolBarAbout->addWidget(new QLabel("Icons from: ", this));
+    ui->toolBarAbout->addWidget(icons8Link);
+    ui->toolBarAbout->addSeparator();
+    ui->toolBarAbout->addWidget(new QLabel("Author: ", this));
+    ui->toolBarAbout->addWidget(myLink);
+    connect(icons8Link,SIGNAL(clicked()),this,SLOT(icons8LinkClicked()));
+    connect(myLink,SIGNAL(clicked()),this,SLOT(myLinkClicked()));
 }
 
 MainWindow::~MainWindow()
@@ -125,6 +139,18 @@ void MainWindow::setItalicsFont()
         italicsFontButton->setStyleSheet("font-style: italic;"
                                          "background-color: black;"
                                          "color: white");
+}
+
+void MainWindow::icons8LinkClicked()
+{
+    QString link = "https://icons8.com/";
+    QDesktopServices::openUrl(QUrl(link));
+}
+
+void MainWindow::myLinkClicked()
+{
+    QString link = "https://adamzielonka.pro/";
+    QDesktopServices::openUrl(QUrl(link));
 }
 
 void MainWindow::on_actionDraw_triggered()
